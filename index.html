@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">Portfolio</div>
+
+        <!-- Menu burger -->
+        <div class="menu-toggle" id="menuToggle">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <!-- Menu principal -->
+        <ul id="menu">
+            <li><a href="#presentation" data-fr="Présentation" data-en="About">Présentation</a></li>
+            <li><a href="#competences" data-fr="Compétences" data-en="Skills">Compétences</a></li>
+
+            <!-- Sous-menu Réalisations -->
+            <li class="dropdown">
+                <a href="#realisations" data-fr="Réalisations" data-en="Projects">Réalisations ▾</a>
+                <ul class="dropdown-content">
+                    <li><a href="#realisations-dev">Dev Web</a></li>
+                    <li><a href="#realisations-design">Design</a></li>
+                    <li><a href="#realisations-animation">Animation</a></li>
+                </ul>
+            </li>
+
+            <!-- Sous-menu Contact -->
+            <li class="dropdown">
+                <a href="#contact" data-fr="Contact" data-en="Contact">Contact </a>
+                <!--            <a href="#contact" data-fr="Contact" data-en="Contact">Contact ▾</a>
+                 <ul class="dropdown-content">
+                    <li><a href="#reseaux">Réseaux sociaux</a></li>
+                    <li><a href="#mail">Mail</a></li>
+                    <li><a href="#cv">Télécharger CV</a></li>
+                </ul> -->
+            </li>
+        </ul>
+
+        <!-- Bouton langue -->
+        <button class="lang-switch" id="langBtn">EN</button>
+    </nav>
+
+    <!-- Fond avec ondes -->
+    <div class="raindrop-impacts"></div>
+
+
+
+
+    <!-- PRESENTATION -->
+    <section id="presentation" class="presentation">
+        <img src="./img/profile.jpg" alt="Photo de profil">
+        <h1 data-fr="Bonjour, je suis Mathéis MONCHATRE" data-en="Hello, I'm Mathéis MONCHATRE">Bonjour, je suis Mathéis
+            MONCHATRE</h1>
+
+        <p data-fr="Créatif Curieux Passioné" data-en="trad en anglais">
+            <strong>Créatif Curieux Passioné</strong>
+        </p>
+
+        <p data-fr="Développeur web passionné par la création de sites modernes et dynamiques. Je suis étudiant en BUT MMI à l'IUT de Blois et passionné de sport, avec un vrai coup de cœur pour l'équitation, que je pratique depuis plusieurs années. J'aime aussi l'art, notamment le dessin, et explorer différents styles et techniques."
+            data-en="Web developer passionate about creating modern and dynamic websites. I am a student in the BUT MMI program at IUT de Blois and a sports enthusiast, with a special love for horse riding, which I have been practicing for several years. I also enjoy art, especially drawing, exploring various styles and techniques.">
+            Développeur web passionné par la création de sites modernes et dynamiques. Je suis étudiant en BUT MMI à
+            l'IUT de Blois et passionné de sport, avec un vrai coup de cœur pour l'équitation, que je pratique depuis
+            plusieurs années. J'aime aussi l'art, notamment le dessin, et explorer différents styles et
+            techniques.
+        <p data-fr="Les jeux vidéo, les dessins animés et les animés ont marqué mon enfance, et je continue à m'émerveiller devant leurs univers détaillés. Grâce à ma formation, je peux créer des sites web en HTML, CSS et JavaScript, en combinant design et technique pour offrir des interfaces interactives et agréables à utiliser."
+            data-en="Video games, cartoons, and anime shaped my childhood, and I still marvel at their detailed universes. Thanks to my training, I can create websites using HTML, CSS, and JavaScript, combining design and technical skills to deliver interactive and user-friendly interfaces.">
+            Les jeux vidéo, les dessins animés et les animés ont marqué mon enfance, et je continue à m'émerveiller
+            devant leurs univers détaillés. Grâce à ma formation, je peux créer des sites web en HTML, CSS et
+            JavaScript, en combinant design et technique pour offrir des interfaces interactives et agréables à
+            utiliser.</p>
+
+        <p data-fr="J'apprécie les petits plaisirs de la vie : contempler les paysages, découvrir leurs odeurs et textures, et expérimenter en cuisine en testant de nouvelles recettes et saveurs."
+            data-en="I enjoy life's little pleasures: admiring landscapes, experiencing their unique smells and textures, and experimenting in the kitchen by trying new recipes and flavors.">
+            J'apprécie les petits plaisirs de la vie : contempler les paysages, découvrir leurs odeurs et textures, et
+            expérimenter en cuisine en testant de nouvelles recettes et saveurs.
+
+        </p>
+    </section>
+
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#0a192f">
+                <animate attributeName="d" dur="6s" repeatCount="indefinite" values="
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z;
+        M0,60 C480,100 960,40 1440,80 L1440,150 L0,150 Z;
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z
+        " />
+            </path>
+        </svg>
+    </div>
+
+
+    <!-- COMPÉTENCES -->
+    <section id="competences" class="competences">
+        <h2 data-fr="Compétences" data-en="Skills">Compétences</h2>
+
+        <div class="competence-grid">
+
+            <!-- Colonne gauche -->
+            <div class="colonne">
+                <div class="categorie">
+                    <h3 data-fr="Front-end" data-en="Front-end">Front-end</h3>
+                    <div class="competence">
+                        <p>HTML / CSS</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="90%">90%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p>JavaScript</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="80%">80%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p>Vue.js</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="70%">70%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="categorie">
+                    <h3 data-fr="Back-end" data-en="Back-end">Back-end</h3>
+                    <div class="competence">
+                        <p>PHP / SQL</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="75%">75%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p>Laravel</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="65%">65%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonne droite -->
+            <div class="colonne">
+                <div class="categorie">
+                    <h3 data-fr="Graphisme" data-en="Design">Graphisme</h3>
+                    <div class="competence">
+                        <p>Figma</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="70%">70%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p>Blender</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="60%">60%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p>Adobe Photoshop</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="75%">75%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="categorie">
+                    <h3 data-fr="Sciences" data-en="Sciences">Sciences</h3>
+                    <div class="competence">
+                        <p data-fr="Automate / Électronique" data-en="Automation / Electronics">Automate / Électronique
+                        </p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="65%">65%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p data-fr="Mécanique des forces" data-en="Mechanics">Mécanique des forces</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="60%">60%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="categorie">
+                    <h3 data-fr="Langues" data-en="Languages">Langues</h3>
+                    <div class="competence">
+                        <p data-fr="Français" data-en="French">Français</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="100%">100%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p data-fr="Anglais" data-en="English">Anglais</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="70%">70%</div>
+                        </div>
+                    </div>
+                    <div class="competence">
+                        <p data-fr="Espagnol" data-en="Spanish">Espagnol</p>
+                        <div class="barre">
+                            <div class="niveau" data-niveau="50%">50%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#0a192f">
+                <animate attributeName="d" dur="6s" repeatCount="indefinite" values="
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z;
+        M0,60 C480,100 960,40 1440,80 L1440,150 L0,150 Z;
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z
+        " />
+            </path>
+        </svg>
+    </div>
+
+    <!-- EXPÉRIENCE -->
+    <section id="experience" class="experience">
+        <h2 data-fr="Expérience" data-en="Experience">Expérience</h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <span class="date">2025</span>
+                <h3>Laboratoire LIFAT - Blois</h3>
+                <p data-fr="Stage en entreprise - Développeur Front & Back End • Création de site web interactif, d'une API"
+                    data-en="Internship - Front & Back End Developer • Built interactive website and API">
+                    Stage en entreprise - Développeur Front & Back End • Création de site web interactif, d'une API
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2023 - 2025</span>
+                <h3>SEL TON CHAR - Barbâtre</h3>
+                <p data-fr="Moniteur char à voile (Jullet-Aout)" data-en="Sand yachting instructor (Jully-August)">
+                    Moniteur char à voile (Jullet-Aout)
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2021 - 2023</span>
+                <h3>SARL Champmarin - Aubigné-Racan</h3>
+                <p data-fr="CDD - Castration du maïs, cerfeuil (Employé saisonnier agricole)"
+                    data-en="Fixed-term contract - Corn and chervil pollination (Seasonal agricultural worker)">
+                    CDD - Castration du maïs, cerfeuil (Employé saisonnier agricole)
+                </p>
+            </div>
+
+            <div class="timeline-item">
+                <span class="date">2019</span>
+                <h3>PMB - Château-du-Loir</h3>
+                <p data-fr="Stage 3ème - Découverte travail en entreprise, développement web (HTML)"
+                    data-en="Internship (9th grade) - Company discovery, web development (HTML)">
+                    Stage 3ème - Découverte travail en entreprise, développement web (HTML)
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#0a192f">
+                <animate attributeName="d" dur="6s" repeatCount="indefinite" values="
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z;
+        M0,60 C480,100 960,40 1440,80 L1440,150 L0,150 Z;
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z
+        " />
+            </path>
+        </svg>
+    </div>
+
+    <!-- RÉALISATIONS -->
+    <h2 data-fr="Réalisations" data-en="Projects">Réalisations</h2>
+
+    <h3>Dev Web</h3>
+    <section id="realisations-dev" class="realisations-grid">
+        <div class="projet">
+            <h3>Projet 1</h3>
+            <!-- <div class="slider">
+                <div class="slides">
+                    <img src="./img/dev/lf.png" alt="Projet 1 - Image 1">
+                    <img src="./img/dev/lf2.png" alt="Projet 1 - Image 2">
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div> -->
+            <img src="./img/dev/lf.png" alt="Projet 1 - Image 1">
+            <p>
+                Création d'un site de e-commerce destiné à la vente de plante, d'accessoire ou alimentation
+                pour les animaux. Réalisé en HTML/CSS avec gestion des produits en JSON.
+            </p>
+        </div>
+
+        <div class="projet">
+            <h3>Projet 2</h3>
+            <!-- <div class="slider">
+                <div class="slides">
+                    <img src="./img/dev/leenscreen.png" alt="Projet 2 - Image 1">
+                    <img src="./img/dev/leenscreen2.png" alt="Projet 2 - Image 2">
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div> -->
+            <img src="./img/dev/leenscreen.png" alt="Projet 2 - Image 1">
+            <p>
+                Création d'un site de e-commerce pour composants d'écran (PC/portable), réalisé en Vue.js avec maquette
+                Figma et gestion en JSON.
+            </p>
+        </div>
+
+        <div class="projet">
+            <h3>Projet 3</h3>
+            <div class="slider">
+                <div class="slides">
+                    <img src="./img/dev/tenornot.png" alt="Projet 1 - Image 1">
+                    <img src="./img/dev/tenornot1.png" alt="Projet 1 - Image 2">
+                    <img src="./img/dev/tenornot2.png" alt="Projet 1 - Image 3">
+                    <img src="./img/dev/tenornot3.png" alt="Projet 1 - Image 4">
+                    <img src="./img/dev/tenornot4.png" alt="Projet 1 - Image 5">
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <p>
+                Création d'un site de e-commerce destiné à la vente de plante, d'accessoire ou alimentation
+                pour les animaux. Réalisé en HTML/CSS avec gestion des produits en JSON.
+            </p>
+        </div>
+    </section>
+
+    <h3>Design</h3>
+    <section id="realisations-design" class="realisations-grid">
+        <div class="projet">
+            <h3>Projet 1</h3>
+            <div class="slider">
+                <div class="slides">
+                    <img src="./img/design/Album devant.png" alt="Projet 2 - Image 1">
+                    <img src="./img/design/album derrière.png" alt="Projet 2 - Image 2">
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <p>Conception graphique d'une pochette d'album (recto/verso).</p>
+        </div>
+
+        <div class="projet">
+            <h3>Projet 2</h3>
+            <div class="slider">
+                <div class="slides">
+                    <img src="./img/design/ChocoYum.png" alt="Projet 2 - Image 1">
+                    <img src="./img/design/ChocoYumZone.png" alt="Projet 2 - Image 2">
+                    <img src="./img/design/ChocoYumGris.png" alt="Projet 2 - Image 3">
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <p>Création graphique moderne et minimaliste pour un projet musical.</p>
+        </div>
+        <div class="projet">
+            <h3>Projet 3</h3>
+            <div class="slider">
+                <div class="slides">
+                    <img src="./img/design/figma3.png" alt="Projet 2 - Image 1">
+                    <img src="./img/design/figma4.png" alt="Projet 2 - Image 2">
+                    <img src="./img/design/figma2.png" alt="Projet 2 - Image 3">
+                    <img src="./img/design/figma.png" alt="Projet 2 - Image 4">
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <p>Création graphique moderne et minimaliste pour un projet musical.</p>
+        </div>
+        <div class="projet">
+            <h3>Projet 4</h3>
+            <img src="./img/design/MotsImage.png" alt="Projet 2 - Image 1">
+            <p>
+                Création d'un site de e-commerce pour composants d'écran (PC/portable), réalisé en Vue.js avec maquette
+                Figma et gestion en JSON.
+            </p>
+        </div>
+        <div class="projet">
+            <h3>Projet 5</h3>
+            <img src="./img/design/pictograme.png" alt="Projet 2 - Image 1">
+            <p>
+                Création d'un site de e-commerce pour composants d'écran (PC/portable), réalisé en Vue.js avec maquette
+                Figma et gestion en JSON.
+            </p>
+        </div>
+    </section>
+
+    <h3>Animation</h3>
+    <section id="realisations-animation" class="realisations-grid">
+        <div class="projet">
+            <h3>Projet 1</h3>
+            <video autoplay loop muted playsinline>
+                <source src="./img/animation/animation_Matheis_MONCHATRE.mp4" type="video/mp4">
+                Ton navigateur ne supporte pas la vidéo.
+            </video>
+            <!-- <img src="./img/animation/animation_Matheis_MONCHATRE.mp4" alt="Projet animation 1"> -->
+            <p>Animation interactive en CSS/JS.</p>
+        </div>
+
+        <div class="projet">
+            <h3>Projet 2</h3>
+            <video autoplay loop muted playsinline>
+                <source src="./img/animation/vortex0001-0250.mp4" type="video/mp4">
+                Ton navigateur ne supporte pas la vidéo.
+            </video>
+            <!-- <img src="./img/animation/vortex0001-0250.mp4" alt="Projet animation 2"> -->
+            <p>Création d'une animation graphique sur canvas.</p>
+        </div>
+
+        <div class="projet">
+            <h3>Projet 3</h3>
+            <div class="slider">
+                <div class="slides">
+                    <video autoplay loop muted playsinline>
+                        <source src="./img/animation/tigre.mp4" type="video/mp4">
+                        Ton navigateur ne supporte pas la vidéo.
+                    </video>
+                    <video autoplay loop muted playsinline>
+                        <source src="./img/animation/oreille1.mp4" type="video/mp4">
+                        Ton navigateur ne supporte pas la vidéo.
+                    </video>
+                </div>
+                <button class="prev">&#10094;</button>
+                <button class="next">&#10095;</button>
+            </div>
+            <p>Création graphique moderne et minimaliste pour un projet musical.</p>
+        </div>
+    </section>
+
+    <div class="wave-bottom">
+        <svg viewBox="0 0 1440 150" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <path fill="#0a192f">
+                <animate attributeName="d" dur="6s" repeatCount="indefinite" values="
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z;
+        M0,60 C480,100 960,40 1440,80 L1440,150 L0,150 Z;
+        M0,40 C480,120 960,0 1440,100 L1440,150 L0,150 Z
+        " />
+            </path>
+        </svg>
+    </div>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
+        <h2 data-fr="Contact" data-en="Contact">Contact</h2>
+        <p data-fr="N'hésitez pas à me contacter via mes réseaux ou par mail."
+            data-en="Feel free to contact me via my socials or by email.">
+            N'hésitez pas à me contacter via mes réseaux ou par mail.
+        </p>
+
+        <div class="contact-container">
+            <div class="contact-item">
+                <a href="math.monchatre@gmail.com" class="btn-contact">📧 Email</a>
+            </div>
+
+            <div class="contact-item">
+                <a href="https://www.linkedin.com/in/matheis-monchatre" target="_blank">🔗 LinkedIn</a>
+            </div>
+
+            <div class="contact-item">
+                <a href="https://github.com/tonprofil" target="_blank">💻 GitHub</a>
+            </div>
+
+            <div class="contact-item">
+                <a href="./cv.pdf" download class="btn-contact">📄 Télécharger CV</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- FLECHE RETOUR HAUT -->
+    <button id="scrollTop">↑</button>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>
