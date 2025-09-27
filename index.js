@@ -121,3 +121,10 @@ setInterval(createDrop, 300);
 
 const p = document.querySelector('p');
 p.innerHTML = p.getAttribute('data-fr').replace(/\n/g, '<br>');
+
+document.querySelectorAll('.attente').forEach(element => {
+  element.addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Site en cours de développement !');
+  });
+});
