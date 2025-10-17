@@ -182,6 +182,70 @@ nav ul li.dropdown:hover .dropdown-content {
 .lang-switch:hover {
     background: #29b6f6;
 }
+/* ----------------- THÈME CLAIR ----------------- */
+body.light-theme {
+  background: linear-gradient(to right, #e0f7fa, #f5f5f5, #cfd8dc);
+  color: #111;
+}
+
+body.light-theme nav {
+  background: rgba(230, 240, 245, 0.9);
+}
+body.light-theme ul {
+  background: rgba(230, 240, 245, 0.9);
+}
+body.light-theme a:hover {
+  background: rgba(230, 240, 245, 0.9);
+}
+
+
+body.light-theme nav ul li a {
+  color: #111;
+}
+
+body.light-theme #contact p {
+  color: #111;
+}
+
+body.light-theme .presentation img {
+  border-color: #2196f3;
+}
+
+body.light-theme .categorie,
+body.light-theme .timeline-item,
+body.light-theme .projet {
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+}
+
+body.light-theme .barre {
+  background: #ddd;
+}
+
+body.light-theme .niveau {
+  color: #000;
+}
+
+body.light-theme .contact {
+  background: linear-gradient(135deg, #f0f4f8, #e3f2fd);
+  color: #000;
+}
+
+.theme-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #4fc3f7;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  color: #29b6f6;
+  transform: rotate(10deg);
+}
+
 /* ----------------- PRESENTATION ----------------- */
 .presentation {
     display: flex;

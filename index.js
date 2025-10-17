@@ -128,3 +128,21 @@ document.querySelectorAll('.attente').forEach(element => {
     alert('Site en cours de développement !');
   });
 });
+
+// --- Thème clair / sombre ---
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light-theme');
+  themeIcon.className = 'bi bi-sun-fill';
+} else {
+  themeIcon.className = 'bi bi-moon-fill';
+}
+
+themeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('light-theme');
+  const isLight = document.body.classList.contains('light-theme');
+  themeIcon.className = isLight ? 'bi bi-sun-fill' : 'bi bi-moon-fill';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
