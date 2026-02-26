@@ -24,12 +24,12 @@ const portfolioData = {
             ]
         },
         keywords: {
-            fr: ["Développeur web","Créatif", "Curieux", "Passionné"],
-            en: ["web developer","Creative", "Curious", "Passionate"]
+            fr: ["Développeur web", "Créatif", "Curieux", "Passionné"],
+            en: ["web developer", "Creative", "Curious", "Passionate"]
         }
     },
 
-    // Compétences
+    // Compétences ---------------------------------------------------------------------------------------------------
     skills: [
         {
             id: "frontend",
@@ -57,7 +57,7 @@ const portfolioData = {
                 { name: "PHP / SQL", level: 85 },
                 { name: "Laravel", level: 65 },
                 { name: "Symfony", level: 75 }
-                
+
             ]
         },
         {
@@ -81,27 +81,42 @@ const portfolioData = {
                 en: "Languages"
             },
             items: [
-                { 
-                    name: { fr: "Français", en: "French" }, 
-                    level: 100 
+                {
+                    name: { fr: "Français", en: "French" },
+                    level: 100
                 },
-                { 
-                    name: { fr: "Anglais", en: "English" }, 
-                    level: 70 
+                {
+                    name: { fr: "Anglais", en: "English" },
+                    level: 70
                 },
-                { 
-                    name: { fr: "Espagnol", en: "Spanish" }, 
-                    level: 45 
+                {
+                    name: { fr: "Espagnol", en: "Spanish" },
+                    level: 45
                 }
             ]
         }
     ],
 
-    // Expériences
+    // Expériences ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     experiences: [
         {
             id: "exp1",
+            year: "2026",
+            time: "15 semaines",
+            company: "Pixim - Saumur",
+            role: {
+                fr: "Stage en entreprise",
+                en: "Internship"
+            },
+            description: {
+                fr: "Développement d'un dashboard interactif avec Joomla pour venir géré la gestion des sites héberger de l'entreprise, développement d'applications web plus aide dévellopeur.",
+                en: "Development of an interactive dashboard with Joomla to manage the company's hosted websites, development of web applications and developer assistance."
+            }
+        },
+        {
+            id: "exp2",
             year: "2025",
+            time: "11 semaines",
             company: "Laboratoire LIFAT - Blois",
             role: {
                 fr: "Stage en entreprise",
@@ -113,8 +128,9 @@ const portfolioData = {
             }
         },
         {
-            id: "exp2",
+            id: "exp3",
             year: "2023 - 2025",
+            time: "2 mois chaque année",
             company: "SEL TON CHAR - Barbâtre",
             role: {
                 fr: "Moniteur char à voile",
@@ -126,8 +142,9 @@ const portfolioData = {
             }
         },
         {
-            id: "exp3",
+            id: "exp4",
             year: "2021 - 2023",
+            time: "2 mois chaque année",
             company: "SARL Champmarin - Aubigné-Racan",
             role: {
                 fr: "Employé saisonnier agricole",
@@ -141,6 +158,7 @@ const portfolioData = {
         {
             id: "exp4",
             year: "2019",
+            time: "1 semaine",
             company: "PMB - Château-du-Loir",
             role: {
                 fr: "Stage découverte développement web en entreprise",
@@ -153,7 +171,7 @@ const portfolioData = {
         }
     ],
 
-    // Projets
+    // Projets ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     projects: {
         dev: [
             {
@@ -278,8 +296,101 @@ const portfolioData = {
                 },
                 link: "#",
                 github: "#"
+            },
+            {
+                id: "project-dev-4",
+                title: "Olympeak - Application Web",
+                category: "dev",
+                thumbnail: "./img/dev/olympeak.png",
+                images: [
+                    "./img/dev/olympeak.png",
+                    "./img/dev/olympeak1.png",
+                    "./img/dev/olympeak2.png",
+                    "./img/dev/olympeak3.png",
+                    "./img/dev/olympeak4.png",
+                    "./img/dev/olympeak5.png",
+                    "./img/dev/olympeak6.png",
+                ],
+                tags: ["REACT", "Symfony", "HTML", "CSS", "JavaScript"],
+                shortDescription: {
+                    fr: "Création d'une appli web interactive en methode fullstack avec React et Symfony",
+                    en: "Creating an interactive multi-page web application with React and Symfony"
+                },
+                fullDescription: {
+                    fr: "Réalisation d'un site permetant de venir retrouver toute les nouvelles du monde du sport, de suivre les compétitions en direct et de consulter les résultats. Le projet a été développé en méthode fullstack avec React pour le front-end et Symfony pour le back-end, offrant une expérience utilisateur fluide et moderne.",
+                    en: "Development of a website allowing users to find all the latest news in the world of sports, follow live competitions and check results. The project was developed in fullstack method with React for the front-end and Symfony for the back-end, providing a smooth and modern user experience."
+                },
+                technologies: ["REACT", "Symfony", "HTML5", "CSS3", "JavaScript"],
+                features: {
+                    fr: [
+                        "Navigation multi-pages fluide",
+                        "Interfaces interactives variées",
+                        "Architecture react et symfony",
+                        "Stockage local des préférences",
+                        "Gestion des données avec Symfony et des rôles utilisateurs"
+                    ],
+                    en: [
+                        "Smooth multi-page navigation",
+                        "Various interactive interfaces",
+                        "React and Symfony architecture",
+                        "Local storage of preferences",
+                        "Data management with Symfony and user roles"
+                    ]
+                },
+                challenges: {
+                    fr: "Créer une expérience utilisateur agréable à travers plusieurs fonctionnalités à la gestion de l'utilisateur tout en maintenant des performances optimales.",
+                    en: "Creating an enjoyable user experience across multiple features related to user management while maintaining optimal performance."
+                },
+                link: "#",
+                github: "#"
+            },
+            {
+                id: "project-dev-5",
+                title: "Sportivea - Evenement Web",
+                category: "dev",
+                thumbnail: "./img/dev/sportivea.png",
+                images: [
+                    "./img/dev/sportivea.png",
+                    "./img/dev/sportivea1.png",
+                    "./img/dev/sportivea2.png",
+                    "./img/dev/sportivea3.png",
+                    "./img/dev/sportivea4.png",
+                    "./img/dev/sportivea5.png",
+                    "./img/dev/sportivea6.png",
+                ],
+                tags: ["NodeJs", "Express", "HTML", "Tailwind CSS", "JavaScript"],
+                shortDescription: {
+                    fr: "Application web gestion d'évènement participatif ",
+                    en: "Interactive multi-page web application for event management"
+                },
+                fullDescription: {
+                    fr: "Une création dédié à la gestion d'évènement sportif, permettant aux utilisateurs de créer, gérer et participer à des événements sportifs locaux. Le projet a été développé avec NodeJs et Express pour le back-end, offrant une expérience utilisateur fluide et moderne.",
+                    en: "A creation dedicated to sports event management, allowing users to create, manage and participate in local sports events. The project was developed with NodeJs and Express for the back-end, providing a smooth and modern user experience."
+                },
+                technologies: ["NodeJs", "Express", "HTML5", "Tailwind CSS", "JavaScript"],
+                features: {
+                    fr: [
+                        "Utilisation simple, rapide et fluide",
+                        "Interfaces interactives variées et modernes",
+                        "Architecture nodejs et express",
+                        "Gestion des données sous forme de JSON"
+                    ],
+                    en: [
+                        "Simple, fast and smooth to use",
+                        "Various interactive interfaces and modern",
+                        "NodeJs and Express architecture",
+                        "Data management with JSON"
+                    ]
+                },
+                challenges: {
+                    fr: "Créer un endroit dédié à la gestion d'évènements sportifs, pour tous les athlètes et passionnés de sport.",
+                    en: "Creating a dedicated place for sports event management, for all athletes and sports enthusiasts."
+                },
+                link: "#",
+                github: "#"
             }
         ],
+        // Design ------------------------------------------------------------------------------------------------------------------------------------------------------------------
         design: [
             {
                 id: "project-design-1",
@@ -328,7 +439,7 @@ const portfolioData = {
                     "./img/design/ChocoYumZone.png",
                     "./img/design/ChocoYumGris.png"
                 ],
-                tags: ["Branding", "Logo"],
+                tags: ["Branding", "Logo", "Adobe Illustrator"],
                 shortDescription: {
                     fr: "Refonte complète de l'identité visuelle d'entreprise",
                     en: "Complete corporate visual identity redesign"
@@ -397,8 +508,48 @@ const portfolioData = {
                     ]
                 },
                 link: "#"
+            },
+            {
+                id: "project-design-4",
+                title: {
+                    fr: "Pictogramme thématique",
+                    en: "Thematic Pictogram"
+                },
+                category: "design",
+                thumbnail: "./img/design/pictograme.png",
+                images: [
+                    "./img/design/pictograme.png"
+                ],
+                tags: ["Picto", "Adobe Illustrator"],
+                shortDescription: {
+                    fr: "Pictogramme thématique sur le thème du japon ",
+                    en: "Thematic pictogram on the theme of japan"
+                },
+                fullDescription: {
+                    fr: "Création de pictogramme sur le thème du Japon, inspiré des motifs traditionnels et de l'esthétique japonaise. En respectant des contraintes imposées lors de l'exercice, qui était de venir séparé le pictogramme en 2 partie distinctes et reprensenté des éléments de la région choisis afin de venir réalisé des éléments symboliques de tous les jours.",
+                    en: "Thematic pictogram created on the theme of Japan, inspired by traditional motifs and Japanese aesthetics. The constraints imposed during the exercise required splitting the pictogram into two distinct parts and representing elements of the chosen region to create symbolic elements of everyday life."
+                },
+                technologies: ["Adobe Illustrator", "Picto Design", "Vector Graphics"],
+                features: {
+                    fr: [
+                        "Pictogramme thématique complet",
+                        "Conception vectorielle précise",
+                        "Respect des contraintes de design",
+                        "Composants réutilisables",
+                        "Pictogramme fonctionnel"
+                    ],
+                    en: [
+                        "Complete thematic pictogram",
+                        "Precise vector design",
+                        "Design constraints respected",
+                        "Reusable components",
+                        "Functional pictogram"
+                    ]
+                },
+                link: "#"
             }
         ],
+        // Animation ------------------------------------------------------------------------------------------------------------------------------------------------------------------
         animation: [
             {
                 id: "project-anim-1",
@@ -511,14 +662,15 @@ const portfolioData = {
         ]
     },
 
-    // Navigation
+    // Navigation ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     navigation: {
         fr: [
             { id: "presentation", text: "Accueil", href: "#presentation" },
             { id: "competences", text: "Compétences", href: "#competences" },
-            { 
-                id: "realisations", 
-                text: "Réalisations", 
+            { id: "experience", text: "Expérience", href: "#experience" },
+            {
+                id: "realisations",
+                text: "Réalisations",
                 href: "#realisations",
                 dropdown: [
                     { text: "Dev Web", href: "#realisations-dev" },
@@ -526,15 +678,14 @@ const portfolioData = {
                     { text: "Animation", href: "#realisations-animation" }
                 ]
             },
-            { id: "experience", text: "Expérience", href: "#experience" },
             { id: "contact", text: "Contact", href: "#contact" }
         ],
         en: [
             { id: "presentation", text: "Home", href: "#presentation" },
             { id: "competences", text: "Skills", href: "#competences" },
-            { 
-                id: "realisations", 
-                text: "Projects", 
+            {
+                id: "realisations",
+                text: "Projects",
                 href: "#realisations",
                 dropdown: [
                     { text: "Dev Web", href: "#realisations-dev" },
@@ -548,7 +699,7 @@ const portfolioData = {
     }
 };
 
-// Export pour utilisation
+// Export pour utilisation ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = portfolioData;
 }

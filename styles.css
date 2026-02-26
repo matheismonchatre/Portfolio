@@ -355,7 +355,7 @@ h1 {
 
 .hero-description {
     font-size: 1.1rem;
-    color: var(--text-muted);
+    color: var(--text-color);
     margin-bottom: 2.5rem;
     max-width: 700px;
     margin-left: auto;
@@ -504,7 +504,7 @@ section {
     font-size: 3rem;
     color: var(--primary-color);
     margin-bottom: 1.5rem;
-    animation: iconPulse 4s ease-in-out infinite;
+    /* animation: iconPulse 4s ease-in-out infinite; */
 }
 
 @keyframes iconPulse {

@@ -496,17 +496,17 @@ function generateContact() {
                 ${currentLang === 'fr' ? 'Vous avez un projet en tête ? Travaillons ensemble !' : "Do you have a project in mind? Let's work together!"}
             </p>
             <div class="contact-links">
-                <a href="mailto:${profile.email}" class="contact-link">
-                    <i class="bi bi-envelope-fill"></i>
-                    <span>Email</span>
+                <a href="${profile.github}" target="_blank" rel="noopener" class="contact-link">
+                    <i class="bi bi-github"></i>
+                    <span>GitHub</span>
                 </a>
                 <a href="${profile.linkedin}" target="_blank" rel="noopener" class="contact-link">
                     <i class="bi bi-linkedin"></i>
                     <span>LinkedIn</span>
                 </a>
-                <a href="${profile.github}" target="_blank" rel="noopener" class="contact-link">
-                    <i class="bi bi-github"></i>
-                    <span>GitHub</span>
+                <a href="mailto:${profile.email}" class="contact-link">
+                    <i class="bi bi-envelope-fill"></i>
+                    <span>Email</span>
                 </a>
             </div>
         </div>
@@ -948,5 +948,3 @@ function initializeTypingEffect() {
 
     setTimeout(typeEffect, 1000);
 }
-
-// console.log('%c🚀 Portfolio chargé avec succès!', 'color: #4fc3f7; font-size: 20px; font-weight: bold;');
