@@ -276,7 +276,7 @@
     background: var(--primary-dark);
 }
 
-/* ==================== RESPONSIVE MODAL ==================== */
+/* ==================== MODAL RESPONSIVE ==================== */
 @media (max-width: 768px) {
     .modal-overlay {
         padding: 10px;

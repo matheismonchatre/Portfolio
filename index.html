@@ -11,13 +11,13 @@
     <meta property="og:type" content="website">
     
     <title>Mathéis Monchatre | Développeur Web</title>
-    <link rel="icon" type="image/png" href="./img/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/mm-logo.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./styles.css">
     <link rel="stylesheet" href="./modal.css">
 </head>
 <body>
-    <!-- Canvas Three.js -->
+    <!-- Canevas Three.js -->
     <canvas id="threejs-canvas"></canvas>
 
     <div class="content-wrapper">
@@ -44,8 +44,17 @@
             <!-- Contenu généré par JS -->
         </section>
 
+        <!-- DIPLÔMES (générée dynamiquement) -->
+        <section id="diplomes" class="diplomes">
+            <!-- Contenu généré par JS -->
+        </section>
         <!-- RÉALISATIONS (générées dynamiquement) -->
         <section id="realisations">
+            <div class="section-header">
+                <h2 data-fr="Réalisations" data-en="Projects" id="realisations-title">Réalisations</h2>
+                <p data-fr="Découvrez mes derniers projets" data-en="Discover my latest projects" id="realisations-subtitle">Découvrez mes derniers projets</p>
+            </div>
+            <div id="filtre"></div>
             <!-- Contenu généré par JS -->
         </section>
 

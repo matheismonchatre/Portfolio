@@ -171,6 +171,36 @@ const portfolioData = {
         }
     ],
 
+    // Diplômes
+    diplomas: [
+        {
+            id: "dip1",
+            year: "2025",
+            title: {
+                fr: "BUT MMI",
+                en: "BUT MMI"
+            },
+            institution: "IUT de Blois",
+            description: {
+                fr: "Parcours en Métiers du Multimédia et de l'Internet - projet, design et dev web.",
+                en: "Bachelor of Multimedia and Internet - projects, design and web dev."
+            }
+        },
+        {
+            id: "dip2",
+            year: "2022",
+            title: {
+                fr: "Baccalauréat STI2D",
+                en: "STI2D High School Diploma"
+            },
+            institution: "Lycée local",
+            description: {
+                fr: "Formation technologique orientée sciences et techniques industrielles.",
+                en: "Technological orientation focused on industrial sciences and techniques."
+            }
+        }
+    ],
+
     // Projets ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     projects: {
         dev: [
@@ -668,6 +698,7 @@ const portfolioData = {
             { id: "presentation", text: "Accueil", href: "#presentation" },
             { id: "competences", text: "Compétences", href: "#competences" },
             { id: "experience", text: "Expérience", href: "#experience" },
+            { id: "diplomes", text: "Diplômes", href: "#diplomes" },
             {
                 id: "realisations",
                 text: "Réalisations",
@@ -683,6 +714,8 @@ const portfolioData = {
         en: [
             { id: "presentation", text: "Home", href: "#presentation" },
             { id: "competences", text: "Skills", href: "#competences" },
+            { id: "experience", text: "Experience", href: "#experience" },
+            { id: "diplomes", text: "Diplomas", href: "#diplomes" },
             {
                 id: "realisations",
                 text: "Projects",
@@ -693,7 +726,6 @@ const portfolioData = {
                     { text: "Animation", href: "#realisations-animation" }
                 ]
             },
-            { id: "experience", text: "Experience", href: "#experience" },
             { id: "contact", text: "Contact", href: "#contact" }
         ]
     }
