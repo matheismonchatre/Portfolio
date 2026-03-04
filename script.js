@@ -215,8 +215,8 @@ function generateDiplomas() {
         </div>
 
         <div class="timeline">
-            ${portfolioData.diplomas.map(d => `
-                <div class="timeline-item">
+            ${portfolioData.diplomas.map((d, index) => `
+                <div class="timeline-item experience-slide" data-delay="${index * 150}">
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
                         <span class="date">${d.year}</span>
@@ -229,7 +229,8 @@ function generateDiplomas() {
         </div>
     `;
 
-    // Petite animation ou réutilisation des observations
+    // Initialiser l'animation des diplômes
+    initializeExperienceAnimation();
 }
 
 // Génération des cartes de projets (déplacée pour disponibilité lors de l'initialisation)
@@ -763,6 +764,11 @@ function generateProjects() {
                     }
                     // Tablette : plusieurs peuvent être ouverts simultanément
                     item.classList.add('open');
+                    
+                    // Scroll vers le haut de l'accordéon
+                    setTimeout(() => {
+                        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 50);
                 }
             });
         });
@@ -841,6 +847,12 @@ function generateProjects() {
     const applyFilters = () => {
         const query = (document.getElementById('projectSearch')?.value || '').trim().toLowerCase();
         projectFilters.query = query;
+
+        // Scroll vers le haut de la section réalisations
+        const projectsHeader = document.querySelector('.projects-header');
+        if (projectsHeader) {
+            projectsHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
         const matched = collectAllProjects().filter(p => {
             const title = (typeof p.title === 'object' ? p.title[currentLang] : p.title || '').toLowerCase();

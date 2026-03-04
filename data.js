@@ -175,28 +175,41 @@ const portfolioData = {
     diplomas: [
         {
             id: "dip1",
-            year: "2025",
+            year: "2023-2026",
             title: {
                 fr: "BUT MMI",
                 en: "BUT MMI"
             },
             institution: "IUT de Blois",
             description: {
-                fr: "Parcours en Métiers du Multimédia et de l'Internet - projet, design et dev web.",
-                en: "Bachelor of Multimedia and Internet - projects, design and web dev."
+                fr: "Formation du Métiers du Multimédia et de l'Internet - projet, design et dev web, en parcours Development Web.",
+                en: "Bachelor of Multimedia and Internet - projects, design and web dev, in the Development Web track."
             }
         },
         {
             id: "dip2",
-            year: "2022",
+            year: "2023",
+            title: {
+                fr: "CQP Moniteur de char à voile",
+                en: "CQP Sand Yachting Instructor"
+            },
+            institution: "Base nautique de Saint-Jean-de-Monts",
+            description: {
+                fr: "Formation d'encadrement en char à voile et gestion de la sécurité d'un groupe.",
+                en: "Training in sand yachting instruction and group safety management."
+            }
+        },
+        {
+            id: "dip3",
+            year: "2020-2023",
             title: {
                 fr: "Baccalauréat STI2D",
                 en: "STI2D High School Diploma"
             },
-            institution: "Lycée local",
+            institution: "Lycée d'Estournelles de Constant - La Flèche",
             description: {
-                fr: "Formation technologique orientée sciences et techniques industrielles.",
-                en: "Technological orientation focused on industrial sciences and techniques."
+                fr: "Formation technologique orientée sciences et technologies de l'industrie et du développement durable, en parcour Systèmes d'Information et Numérique.",
+                en: "Technological orientation focused on industrial sciences and techniques and development sustainability, in the field of Information Systems and Digital Technologya."
             }
         }
     ],
@@ -394,8 +407,8 @@ const portfolioData = {
                     en: "Interactive multi-page web application for event management"
                 },
                 fullDescription: {
-                    fr: "Une création dédié à la gestion d'évènement sportif, permettant aux utilisateurs de créer, gérer et participer à des événements sportifs locaux. Le projet a été développé avec NodeJs et Express pour le back-end, offrant une expérience utilisateur fluide et moderne.",
-                    en: "A creation dedicated to sports event management, allowing users to create, manage and participate in local sports events. The project was developed with NodeJs and Express for the back-end, providing a smooth and modern user experience."
+                    fr: "Une création dédié à la gestion d'évènement sportif, permettant aux utilisateurs de créer, gérer et participer à des événements sportifs locaux. Le projet a été développé avec NodeJs et Express pour le back-end, offrant une expérience utilisateur fluide et moderne. Pour voir le projet, cliquez sur le lien suivant : <a href=\"http://sportivea.alwaysdata.net\" target=\"_blank\">Voir le projet</a>",
+                    en: "A creation dedicated to sports event management, allowing users to create, manage and participate in local sports events. The project was developed with NodeJs and Express for the back-end, providing a smooth and modern user experience. To view the project, click on the following link: <a href=\"http://sportivea.alwaysdata.net\" target=\"_blank\">View the project</a>"
                 },
                 technologies: ["NodeJs", "Express", "HTML5", "Tailwind CSS", "JavaScript"],
                 features: {
@@ -433,12 +446,12 @@ const portfolioData = {
                 images: ["./img/design/Album devant.png", "./img/design/album derrière.png"],
                 tags: ["Design", "Photoshop"],
                 shortDescription: {
-                    fr: "Conception graphique d'une pochette d'album musicale",
-                    en: "Graphic design of a music album cover"
+                    fr: "Conception graphique d'une pochette d'album musicale avec pour thème Imagine Dragons",
+                    en: "Graphic design of a music album cover with the theme Imagine Dragons"
                 },
                 fullDescription: {
-                    fr: "Projet de conception graphique d'une pochette d'album complète (recto/verso) avec une identité visuelle forte et cohérente. Le design a été pensé pour capturer l'essence de l'artiste tout en respectant les codes visuels du genre musical. L'utilisation de Photoshop a permis de créer des effets visuels sophistiqués et une composition équilibrée.",
-                    en: "Complete album cover graphic design project (front/back) with strong and consistent visual identity. The design was created to capture the essence of the artist while respecting the visual codes of the musical genre. Using Photoshop allowed creating sophisticated visual effects and balanced composition."
+                    fr: "Projet universitaire de conception graphique d'une pochette d'album complète (recto/verso) avec une identité visuelle forte et cohérente. Le design a été pensé pour capturer l'essence de l'artiste tout en respectant les codes visuels du genre musical. L'utilisation de Photoshop a permis de créer des effets visuels sophistiqués et une composition équilibrée.",
+                    en: "University project involving the graphic design of a complete album cover (front and back) with a strong and consistent visual identity. The design was conceived to capture the essence of the artist while respecting the visual codes of the musical genre. The use of Photoshop made it possible to create sophisticated visual effects and a balanced composition."
                 },
                 technologies: ["Adobe Photoshop", "Typography", "Color Theory"],
                 features: {
@@ -590,7 +603,7 @@ const portfolioData = {
                 category: "animation",
                 thumbnail: "./img/animation/animation_Matheis_MONCHATRE.mp4",
                 video: "./img/animation/animation_Matheis_MONCHATRE.mp4",
-                tags: ["Blender", "3D"],
+                tags: ["Blender", "2D", "animation"],
                 shortDescription: {
                     fr: "Animation 3D réalisée image par image",
                     en: "3D animation created frame by frame"
@@ -697,8 +710,8 @@ const portfolioData = {
         fr: [
             { id: "presentation", text: "Accueil", href: "#presentation" },
             { id: "competences", text: "Compétences", href: "#competences" },
-            { id: "experience", text: "Expérience", href: "#experience" },
             { id: "diplomes", text: "Diplômes", href: "#diplomes" },
+            { id: "experience", text: "Expérience", href: "#experience" },
             {
                 id: "realisations",
                 text: "Réalisations",
@@ -714,8 +727,8 @@ const portfolioData = {
         en: [
             { id: "presentation", text: "Home", href: "#presentation" },
             { id: "competences", text: "Skills", href: "#competences" },
-            { id: "experience", text: "Experience", href: "#experience" },
             { id: "diplomes", text: "Diplomas", href: "#diplomes" },
+            { id: "experience", text: "Experience", href: "#experience" },
             {
                 id: "realisations",
                 text: "Projects",

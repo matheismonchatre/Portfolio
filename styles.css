@@ -724,8 +724,8 @@ p,
 
 .quick-filter-btn {
     padding: 0.5rem 1rem;
-    background: rgba(79, 195, 247, 0.08);
-    border: 1px solid rgba(79, 195, 247, 0.25);
+    background: rgba(79, 180, 247, 0.432);
+    border: 1px solid rgba(79, 124, 247, 0.25);
     color: var(--primary-color);
     border-radius: 20px;
     cursor: pointer;
@@ -911,7 +911,7 @@ h1,
 
 /* ==================== SECTIONS ==================== */
 section {
-    padding: 6rem 5%;
+    padding: 1rem 3%;
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
@@ -1728,6 +1728,32 @@ section {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+
+/* Styliser la scrollbar */
+.tags-list::-webkit-scrollbar,
+.techs-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.tags-list::-webkit-scrollbar-track,
+.techs-list::-webkit-scrollbar-track {
+    background: rgba(79, 195, 247, 0.05);
+    border-radius: 10px;
+}
+
+.tags-list::-webkit-scrollbar-thumb,
+.techs-list::-webkit-scrollbar-thumb {
+    background: rgba(79, 195, 247, 0.3);
+    border-radius: 10px;
+}
+
+.tags-list::-webkit-scrollbar-thumb:hover,
+.techs-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(79, 195, 247, 0.5);
 }
 
 .chip {
