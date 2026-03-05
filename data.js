@@ -12,7 +12,10 @@ const portfolioData = {
         email: "math.monchatre@gmail.com",
         linkedin: "https://www.linkedin.com/in/matheis-monchatre",
         github: "#",
-        cv: "#",
+        cv: {
+            fr: "./img/MONCHATRE_MATHEIS_CV_FR.pdf",
+            en: "./img/MONCHATRE_MATHEIS_CV_EN.pdf"
+        },
         description: {
             fr: [
                 "Développeur web passionné par la création de sites modernes et dynamiques. Étudiant en BUT MMI à l'IUT de Blois, j'allie technique et créativité pour concevoir des interfaces interactives et intuitives.",
@@ -41,8 +44,11 @@ const portfolioData = {
             items: [
                 { name: "HTML / CSS", level: 90 },
                 { name: "JavaScript", level: 80 },
+                { name: "ChartJs", level: 75 },
+                { name: "Three.js", level: 75 },
                 { name: "Vue.js", level: 60 },
-                { name: "React.js", level: 75 }
+                { name: "React.js", level: 75 },
+                { name: "API REST", level: 70 },
 
             ]
         },
@@ -56,7 +62,23 @@ const portfolioData = {
             items: [
                 { name: "PHP / SQL", level: 85 },
                 { name: "Laravel", level: 65 },
-                { name: "Symfony", level: 75 }
+                { name: "Symfony", level: 75 },
+                { name: "NodeJs / Express", level: 50 },
+                { name: "Python / Flask", level: 60 },
+                { name: "Git", level: 80 },
+                { name: "Docker", level: 50 }
+            ]
+        },
+        {
+            id: "CMS",
+            icon: "bi-grid-1x2-fill",
+            title: {
+                fr: "CMS",
+                en: "CMS"
+            },
+            items: [
+                { name: "WordPress", level: 75 },
+                { name: "Joomla", level: 30 },
 
             ]
         },
@@ -70,7 +92,7 @@ const portfolioData = {
             items: [
                 { name: "Figma", level: 70 },
                 { name: "Blender", level: 60 },
-                { name: "Adobe Photoshop", level: 75 }
+                { name: "App Adobe", level: 75 }
             ]
         },
         {
@@ -94,7 +116,22 @@ const portfolioData = {
                     level: 45
                 }
             ]
-        }
+        },
+        {
+            id: "Sciences",
+            icon: "bi-cpu",
+            title: {
+                fr: "Sciences",
+                en: "Sciences"
+            },
+            items: [
+                { name: { fr: "Automate", en: "Automation" }, level: 70 },
+                { name: { fr: "Circuit électronique", en: "Electronic Circuit" }, level: 60 },
+                { name: { fr: "Architecture", en: "Architecture" }, level: 75 },
+                { name: { fr: "Mécanique des forces", en: "Mechanics of Forces" }, level: 70 }
+
+            ]
+        },
     ],
 
     // Expériences ------------------------------------------------------------------------------------------------------------------------------------------------------------------

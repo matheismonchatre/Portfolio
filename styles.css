@@ -1942,6 +1942,7 @@ section {
 /* ==================== CONTACT ==================== */
 .contact {
     text-align: center;
+    padding-top: 20vh;
 }
 
 .contact-info {

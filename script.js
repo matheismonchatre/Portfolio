@@ -26,32 +26,101 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 camera.position.z = 5;
 
 // Particules
-const particlesGeometry = new THREE.BufferGeometry();
-const particlesCount = 2000;
-const posArray = new Float32Array(particlesCount * 3);
+// PARTICULES 2D (ROND / CARRÉ / ÉTOILE)
+// =============================
 
-for (let i = 0; i < particlesCount * 3; i++) {
-    posArray[i] = (Math.random() - 0.5) * 10;
+function createShapeTexture(type) {
+    const size = 128;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
+
+    if (type === 'circle') {
+        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    if (type === 'square') {
+        ctx.fillRect(0, 0, size, size);
+    }
+
+    if (type === 'star') {
+        const spikes = 5;
+        const outerRadius = size / 2;
+        const innerRadius = size / 4;
+        let rot = Math.PI / 2 * 3;
+        let x = size / 2;
+        let y = size / 2;
+        const step = Math.PI / spikes;
+
+        ctx.moveTo(size / 2, size / 2 - outerRadius);
+
+        for (let i = 0; i < spikes; i++) {
+            x = size / 2 + Math.cos(rot) * outerRadius;
+            y = size / 2 + Math.sin(rot) * outerRadius;
+            ctx.lineTo(x, y);
+            rot += step;
+
+            x = size / 2 + Math.cos(rot) * innerRadius;
+            y = size / 2 + Math.sin(rot) * innerRadius;
+            ctx.lineTo(x, y);
+            rot += step;
+        }
+
+        ctx.lineTo(size / 2, size / 2 - outerRadius);
+        ctx.fill();
+    }
+
+    return new THREE.CanvasTexture(canvas);
 }
 
-particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+function createParticles(texture, count) {
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(count * 3);
 
-const particlesMaterial = new THREE.PointsMaterial({
-    size: 0.015,
-    color: 0x4fc3f7,
-    transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending
-});
+    for (let i = 0; i < count * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 10;
+    }
 
-const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particlesMesh);
+    geometry.setAttribute(
+        'position',
+        new THREE.BufferAttribute(positions, 3)
+    );
+
+    const material = new THREE.PointsMaterial({
+        size: 0.025,
+        map: texture,
+        transparent: true,
+        alphaTest: 0.5,
+        depthWrite: false,
+        color: 0x4fc3f7,
+        blending: THREE.AdditiveBlending
+    });
+
+    return new THREE.Points(geometry, material);
+}
+
+const particlesCount = 2000;
+const part = Math.floor(particlesCount / 3);
+
+const circleParticles = createParticles(createShapeTexture('circle'), part);
+const squareParticles = createParticles(createShapeTexture('square'), part);
+const starParticles = createParticles(createShapeTexture('star'), part);
+
+scene.add(circleParticles);
+scene.add(squareParticles);
+scene.add(starParticles);
 
 // Formes géométriques qui changent selon la section
 let currentShape = null;
 const shapes = {
     presentation: createTorus(),
     competences: createIcosahedron(),
+    // diplomas: createSphere(),
     experience: createOctahedron(),
     realisations: createDodecahedron(),
     contact: createSphere()
@@ -185,9 +254,17 @@ function animate() {
         currentShape.rotation.y += 0.005;
     }
 
-    particlesMesh.rotation.y += 0.001;
-    particlesMesh.rotation.x = mouseY * 0.1;
-    particlesMesh.rotation.y = mouseX * 0.1;
+    circleParticles.rotation.y += 0.001;
+    squareParticles.rotation.y += 0.001;
+    starParticles.rotation.y += 0.001;
+
+    circleParticles.rotation.x = mouseY * 0.1;
+    squareParticles.rotation.x = mouseY * 0.1;
+    starParticles.rotation.x = mouseY * 0.1;
+
+    circleParticles.rotation.y = mouseX * 0.1;
+    squareParticles.rotation.y = mouseX * 0.1;
+    starParticles.rotation.y = mouseX * 0.1;
 
     camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.05;
     camera.position.y += (mouseY * 0.5 - camera.position.y) * 0.05;
@@ -342,7 +419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
     initializeLanguage();
     initializeModals();
-    initializeRaindrops();
+    // initializeRaindrops();
 });
 
 // ==================== GÉNÉRATION NAVIGATION ====================
@@ -764,11 +841,11 @@ function generateProjects() {
                     }
                     // Tablette : plusieurs peuvent être ouverts simultanément
                     item.classList.add('open');
-                    
-                    // Scroll vers le haut de l'accordéon
+
+                    // Scroll vers le haut de l'accordéon (après l'animation d'ouverture)
                     setTimeout(() => {
-                        header.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 50);
+                        header.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }, 400);
                 }
             });
         });
@@ -844,14 +921,16 @@ function generateProjects() {
         if (applyBtn) applyBtn.addEventListener('click', applyFilters);
     };
 
-    const applyFilters = () => {
+    const applyFilters = (shouldScroll = true) => {
         const query = (document.getElementById('projectSearch')?.value || '').trim().toLowerCase();
         projectFilters.query = query;
 
-        // Scroll vers le haut de la section réalisations
-        const projectsHeader = document.querySelector('.projects-header');
-        if (projectsHeader) {
-            projectsHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll vers le haut de la section réalisations (seulement si c'est une action utilisateur)
+        if (shouldScroll) {
+            const projectsHeader = document.querySelector('.projects-header');
+            if (projectsHeader) {
+                projectsHeader.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
         const matched = collectAllProjects().filter(p => {
@@ -978,16 +1057,16 @@ function generateProjects() {
         const accBtn = document.getElementById('viewAccordion');
         if (!gridBtn || !accBtn) return;
 
-        const setMode = (mode) => {
+        const setMode = (mode, isInitial = false) => {
             projectViewMode = mode;
             gridBtn.setAttribute('aria-pressed', mode === 'grid');
             accBtn.setAttribute('aria-pressed', mode === 'accordion');
-            applyFilters();
+            applyFilters(!isInitial); // ne scroll que si ce n'est pas l'appel initial
         };
 
         gridBtn.addEventListener('click', () => setMode('grid'));
         accBtn.addEventListener('click', () => setMode('accordion'));
-        setMode(projectViewMode);
+        setMode(projectViewMode, true); // true = appel initial, pas de scroll
     };
 
     // ========== APPELER LES FONCTIONS D'INITIALISATION ==========
@@ -997,19 +1076,19 @@ function generateProjects() {
     const filterCloseBtn = document.getElementById('filterCloseBtn');
     const sidebar = document.getElementById('sidebarPanel');
     const sidebarOverlay = document.getElementById('sidebarOverlay');
-    
+
     const openSidebar = () => {
         if (sidebar) sidebar.classList.add('open');
         if (sidebarOverlay) sidebarOverlay.classList.add('active');
         document.body.style.overflow = 'hidden';
     };
-    
+
     const closeSidebar = () => {
         if (sidebar) sidebar.classList.remove('open');
         if (sidebarOverlay) sidebarOverlay.classList.remove('active');
         document.body.style.overflow = '';
     };
-    
+
     if (filterToggle && sidebar) {
         filterToggle.addEventListener('click', () => {
             if (sidebar.classList.contains('open')) {
@@ -1023,7 +1102,7 @@ function generateProjects() {
     if (filterCloseBtn && sidebar) {
         filterCloseBtn.addEventListener('click', closeSidebar);
     }
-    
+
     if (sidebarOverlay) {
         sidebarOverlay.addEventListener('click', closeSidebar);
     }
@@ -1254,6 +1333,7 @@ function applyFilters() {
 function generateContact() {
     const section = document.getElementById('contact');
     const profile = portfolioData.profile;
+    //  console.log(profile.cv[currentLang]);
 
     section.innerHTML = `
         <div class="section-header">
@@ -1279,6 +1359,10 @@ function generateContact() {
                 <a href="mailto:${profile.email}" class="contact-link">
                     <i class="bi bi-envelope-fill"></i>
                     <span>Email</span>
+                </a>
+                <a href="${profile.cv[currentLang]}" download target="_blank" rel="noopener" class="contact-link">
+                    <i class="bi bi-file-earmark-person-fill"></i>
+                    <span>CV</span>
                 </a>
             </div>
         </div>
@@ -1607,32 +1691,32 @@ function initializeSkillsAnimation() {
 }
 
 // ==================== ANIMATION GOUTTES ====================
-function initializeRaindrops() {
-    const container = document.querySelector('.raindrop-impacts');
+// function initializeRaindrops() {
+//     const container = document.querySelector('.raindrop-impacts');
 
-    function createDrop() {
-        const drop = document.createElement('div');
-        drop.classList.add('drop');
+//     function createDrop() {
+//         const drop = document.createElement('div');
+//         drop.classList.add('drop');
 
-        drop.style.left = Math.random() * 100 + '%';
-        drop.style.top = Math.random() * 100 + '%';
+//         drop.style.left = Math.random() * 100 + '%';
+//         drop.style.top = Math.random() * 100 + '%';
 
-        const size = Math.random() * 40 + 20;
-        drop.style.width = size + 'px';
-        drop.style.height = size + 'px';
+//         const size = Math.random() * 40 + 20;
+//         drop.style.width = size + 'px';
+//         drop.style.height = size + 'px';
 
-        const duration = (Math.random() * 1.5 + 1.5).toFixed(2);
-        drop.style.animationDuration = duration + 's';
+//         const duration = (Math.random() * 1.5 + 1.5).toFixed(2);
+//         drop.style.animationDuration = duration + 's';
 
-        container.appendChild(drop);
+//         container.appendChild(drop);
 
-        setTimeout(() => {
-            drop.remove();
-        }, duration * 1000);
-    }
+//         setTimeout(() => {
+//             drop.remove();
+//         }, duration * 1000);
+//     }
 
-    setInterval(createDrop, 400);
-}
+//     setInterval(createDrop, 400);
+// }
 
 // ==================== THÈME ====================
 function initializeTheme() {
