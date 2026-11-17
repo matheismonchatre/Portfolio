@@ -12,17 +12,19 @@ const projectFilters = {
 // Référence globale vers la fonction renderFilteredResults (définie dans generateProjects)
 let renderFilteredResults = null;
 
+// Mode léger (mobile / mouvement réduit)
+const LITE = window.innerWidth < 768 || window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ==================== ARRIÈRE-PLAN THREE.JS ====================
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById('threejs-canvas'),
     alpha: true,
-    antialias: true
+    antialias: !LITE
 });
 
 renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setPixelRatio(LITE ? 1 : Math.min(window.devicePixelRatio, 1.5));
 camera.position.z = 5;
 
 // Particules
@@ -104,7 +106,7 @@ function createParticles(texture, count) {
     return new THREE.Points(geometry, material);
 }
 
-const particlesCount = 2000;
+const particlesCount = LITE ? 240 : 600;
 const part = Math.floor(particlesCount / 3);
 
 const circleParticles = createParticles(createShapeTexture('circle'), part);
@@ -248,6 +250,8 @@ function morphToShape(newShape) {
 // Animation
 function animate() {
     requestAnimationFrame(animate);
+    // Pause quand l'onglet est caché ou après l'accueil (le fond devient une ambiance CSS)
+    if (document.hidden || window.scrollY > window.innerHeight * 1.2) return;
 
     if (currentShape) {
         currentShape.rotation.x += 0.005;
@@ -320,12 +324,13 @@ function generateProjectCards(category) {
 
         let mediaHtml = '';
         if (project.video) {
-            mediaHtml = `<video autoplay loop muted playsinline><source src="${project.video}" type="video/mp4"></video>`;
+            mediaHtml = `<video autoplay loop muted playsinline preload="metadata"><source src="${project.video}" type="video/mp4"></video>`;
         } else if (project.videos && project.videos.length > 0) {
-            mediaHtml = `<video autoplay loop muted playsinline><source src="${project.videos[0]}" type="video/mp4"></video>`;
+            mediaHtml = `<video autoplay loop muted playsinline preload="metadata"><source src="${project.videos[0]}" type="video/mp4"></video>`;
         } else {
             const imgSrc = project.thumbnail || (project.images && project.images[0]) || 'https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project';
-            mediaHtml = `<img src="${imgSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project'">`;
+            mediaHtml = `<img loading="lazy" decoding="async" src="${imgSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project'">`;
+        if (!project.thumbnail && !(project.images && project.images.length)) mediaHtml = noImageHtml(project);
         }
 
         return `
@@ -340,6 +345,7 @@ function generateProjectCards(category) {
                 </div>
                 <div class="project-info">
                     <h3>${title}</h3>
+                    ${project.status ? `<span class="wip-badge"><i class="bi bi-hammer"></i> ${project.status[currentLang]}</span>` : ''}${project.internship ? `<span class="stage-badge"><i class="bi ${project.badgeIcon || 'bi-briefcase-fill'}"></i> ${project.internship[currentLang]}</span>` : ''}
                     <div class="project-tags">
                         ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                     </div>
@@ -362,7 +368,8 @@ function generateAccordionItemHTML(project, category) {
         mediaHtml = `<video autoplay loop muted playsinline style="max-width: 100%; height: auto;"><source src="${project.videos[0]}" type="video/mp4"></video>`;
     } else {
         const imgSrc = project.thumbnail || (project.images && project.images[0]) || 'https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project';
-        mediaHtml = `<img src="${imgSrc}" alt="${title}" style="max-width: 100%; height: auto;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project'">`;
+        mediaHtml = `<img loading="lazy" decoding="async" src="${imgSrc}" alt="${title}" style="max-width: 100%; height: auto;" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project'">`;
+        if (!project.thumbnail && !(project.images && project.images.length)) mediaHtml = noImageHtml(project);
     }
 
     const categoryLabel = {
@@ -410,6 +417,7 @@ document.addEventListener('DOMContentLoaded', () => {
     generateExperiences();
     generateDiplomas();
     generateProjects();
+    generatePassions();
     generateContact();
 
     initializeNavigation();
@@ -479,6 +487,8 @@ function generatePresentation() {
                 <div class="profile-ring"></div>
             </div>
             
+            ${availabilityHtml()}
+
             <h1>
                 <span data-fr="Bonjour, je suis" data-en="Hello, I'm">${currentLang === 'fr' ? 'Bonjour, je suis' : "Hello, I'm"}</span>
                 <strong class="gradient-text">${profile.name}</strong>
@@ -1059,6 +1069,8 @@ function generateProjects() {
 
         const setMode = (mode, isInitial = false) => {
             projectViewMode = mode;
+            // Mode liste : on masque le panneau de filtres
+            document.querySelector('.realisations-wrapper')?.classList.toggle('list-mode', mode === 'accordion');
             gridBtn.setAttribute('aria-pressed', mode === 'grid');
             accBtn.setAttribute('aria-pressed', mode === 'accordion');
             applyFilters(!isInitial); // ne scroll que si ce n'est pas l'appel initial
@@ -1209,12 +1221,13 @@ function generateProjectCardHTML(project, category) {
 
     let mediaHtml = '';
     if (project.video) {
-        mediaHtml = `<video autoplay loop muted playsinline><source src="${project.video}" type="video/mp4"></video>`;
+        mediaHtml = `<video autoplay loop muted playsinline preload="metadata"><source src="${project.video}" type="video/mp4"></video>`;
     } else if (project.videos && project.videos.length > 0) {
-        mediaHtml = `<video autoplay loop muted playsinline><source src="${project.videos[0]}" type="video/mp4"></video>`;
+        mediaHtml = `<video autoplay loop muted playsinline preload="metadata"><source src="${project.videos[0]}" type="video/mp4"></video>`;
     } else {
         const imgSrc = project.thumbnail || (project.images && project.images[0]) || 'https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project';
-        mediaHtml = `<img src="${imgSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project'">`;
+        mediaHtml = `<img loading="lazy" decoding="async" src="${imgSrc}" alt="${title}" onerror="this.src='https://via.placeholder.com/400x300/1a1a1a/4fc3f7?text=Project'">`;
+        if (!project.thumbnail && !(project.images && project.images.length)) mediaHtml = noImageHtml(project);
     }
 
     return `
@@ -1227,6 +1240,7 @@ function generateProjectCardHTML(project, category) {
             </div>
             <div class="project-info">
                 <h3>${title}</h3>
+                ${project.status ? `<span class="wip-badge"><i class="bi bi-hammer"></i> ${project.status[currentLang]}</span>` : ''}${project.internship ? `<span class="stage-badge"><i class="bi ${project.badgeIcon || 'bi-briefcase-fill'}"></i> ${project.internship[currentLang]}</span>` : ''}
                 <div class="project-tags">
                     ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
@@ -1436,11 +1450,14 @@ function openProjectModal(project) {
         mediaHtml = `<div class="modal-media"><img src="${project.images[0]}" alt="${title}" onerror="this.src='https://via.placeholder.com/800x600/1a1a1a/4fc3f7?text=Image'"></div>`;
     } else if (project.thumbnail) {
         mediaHtml = `<div class="modal-media"><img src="${project.thumbnail}" alt="${title}" onerror="this.src='https://via.placeholder.com/800x600/1a1a1a/4fc3f7?text=Image'"></div>`;
+    } else if (project.imageNote) {
+        mediaHtml = `<div class="modal-media">${noImageHtml(project)}</div>`;
     }
 
     modalContent.innerHTML = `
         <div class="modal-header">
             <h2>${title}</h2>
+            ${project.status ? `<span class="wip-badge"><i class="bi bi-hammer"></i> ${project.status[currentLang]}</span>` : ''}${project.internship ? `<span class="stage-badge"><i class="bi ${project.badgeIcon || 'bi-briefcase-fill'}"></i> ${project.internship[currentLang]}</span>` : ''}
         </div>
         
         ${mediaHtml}
@@ -1481,7 +1498,7 @@ function openProjectModal(project) {
                     ${project.link && project.link !== '#' ? `
                         <a href="${project.link}" class="btn btn-primary" target="_blank" rel="noopener">
                             <i class="bi bi-box-arrow-up-right"></i>
-                            <span>${currentLang === 'fr' ? 'Voir le projet' : 'View project'}</span>
+                            <span>${project.category === 'dev' ? (currentLang === 'fr' ? 'Voir le site' : 'Visit the website') : (currentLang === 'fr' ? 'Voir le projet' : 'View project')}</span>
                         </a>
                     ` : ''}
                     ${project.github && project.github !== '#' ? `
@@ -1737,7 +1754,7 @@ function initializeTheme() {
         localStorage.setItem('theme', isLight ? 'light' : 'dark');
 
         const color = isLight ? 0x2196f3 : 0x4fc3f7;
-        particlesMaterial.color.setHex(color);
+        [circleParticles, squareParticles, starParticles].forEach(p => p.material.color.setHex(color));
         if (currentShape) {
             currentShape.material.color.setHex(color);
         }
@@ -1776,6 +1793,7 @@ function initializeLanguage() {
             generateExperiences();
             generateDiplomas();
             generateProjects();
+            generatePassions();
             generateContact();
 
             // Réattacher les écouteurs aux nouveaux éléments DOM
@@ -1797,8 +1815,8 @@ function initializeTypingEffect() {
     if (!typingText) return;
 
     const texts = {
-        fr: ['Développeur Web', 'Designer UI/UX', 'Créateur 3D', 'Passionné de Code'],
-        en: ['Web Developer', 'UI/UX Designer', '3D Creator', 'Code Enthusiast']
+        fr: ['Développeur Web', 'Designer UI/UX', 'Créateur 3D', 'Passionné de Code', 'Passionné de VR'],
+        en: ['Web Developer', 'UI/UX Designer', '3D Creator', 'Code Enthusiast', 'VR Enthusiast']
     };
 
     let textIndex = 0;
@@ -1841,3 +1859,369 @@ function initializeTypingEffect() {
 }
 
 // ==================== FIN SCRIPT ====================
+
+// ==================== EXTRAS : rail de sections, ambiance, footer ====================
+(function () {
+    const ids = ['presentation', 'competences', 'diplomes', 'experience', 'realisations', 'passions', 'contact'];
+    let rail = null, cur = 'presentation';
+
+    function buildRail() {
+        if (!rail) {
+            rail = document.createElement('div');
+            rail.setAttribute('role', 'navigation');
+            rail.id = 'sideRail';
+            rail.setAttribute('aria-label', 'Sections');
+            document.body.appendChild(rail);
+        }
+        const labels = {};
+        portfolioData.navigation[currentLang].forEach(i => labels[i.id] = i.text);
+        rail.innerHTML = ids.map(id => `<a href="#${id}"><i></i><span>${labels[id] || id}</span></a>`).join('');
+        mark(cur);
+    }
+
+    function mark(id) {
+        cur = id;
+        const k = ids.indexOf(id);
+        if (rail) rail.querySelectorAll('a').forEach((a, i) => { a.className = i === k ? 'on' : (i === k - 1 ? 'prev' : (i === k + 1 ? 'next' : '')); });
+        document.body.dataset.amb = id;
+        document.body.classList.toggle('past-hero', id !== 'presentation');
+    }
+
+    function buildFooter() {
+        let f = document.getElementById('siteFooter');
+        if (!f) {
+            f = document.createElement('footer');
+            f.id = 'siteFooter';
+            document.querySelector('.content-wrapper').appendChild(f);
+        }
+        const name = portfolioData.profile.name;
+        f.innerHTML = `<p>&copy; ${new Date().getFullYear()} ${name}. ${currentLang === 'fr' ? 'Tous droits réservés.' : 'All rights reserved.'} &middot; <button type="button" class="legal-link">${portfolioData.legal.link[currentLang]}</button></p>`;
+    }
+
+    function init() {
+        buildRail();
+        buildFooter();
+        const io = new IntersectionObserver(es => {
+            es.forEach(e => { if (e.isIntersecting) mark(e.target.id); });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        ids.forEach(id => { const el = document.getElementById(id); if (el) io.observe(el); });
+    }
+
+    // Barre de navigation : se masque en descendant (desktop), revient en remontant ou en allant vers le haut
+    function initNavHide() {
+        const nav = document.getElementById('mainNav');
+        const desk = window.matchMedia('(min-width: 769px) and (hover: hover)');
+        if (!nav) return;
+        let lastY = window.scrollY, ticking = false;
+        const onScroll = () => {
+            const y = window.scrollY, dy = y - lastY;
+            if (!desk.matches || y < 120) nav.classList.remove('nav-hidden');
+            else if (dy > 6) nav.classList.add('nav-hidden');
+            else if (dy < -6) nav.classList.remove('nav-hidden');
+            lastY = y; ticking = false;
+        };
+        window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+        document.addEventListener('mousemove', e => { if (desk.matches && e.clientY < 90) nav.classList.remove('nav-hidden'); }, { passive: true });
+        nav.addEventListener('focusin', () => nav.classList.remove('nav-hidden'));
+    }
+
+    // Changement de langue : le bouton est régénéré par script.js, on reconstruit après son handler
+    document.addEventListener('click', e => {
+        if (e.target.closest && e.target.closest('#langBtn')) setTimeout(() => { buildRail(); buildFooter(); }, 0);
+    });
+
+    init();
+    initNavHide();
+})();
+
+
+// Vignette locale pour les projets sans image (pas de service externe)
+function noImageHtml(project) {
+    const fr = currentLang === 'fr';
+    const icon = project.icon || (project.category === 'design' ? 'bi-box' : 'bi-controller');
+    const text = project.imageNote ? project.imageNote[currentLang] : (fr ? 'Aperçu bientôt disponible' : 'Preview coming soon');
+    return `<div class="project-noimg"><i class="bi ${icon}"></i><span>${text}</span></div>`;
+}
+
+// ==================== PASSIONS ====================
+const pT = v => (v && typeof v === 'object') ? (v[currentLang] ?? v.fr ?? '') : (v ?? '');
+let psActivated = false, psIdx = 0, psPhotos = [], psLbI = 0;
+
+// ---------- Pictogrammes : icônes Bootstrap Icons (déjà chargées sur le site) + un cheval dessiné en SVG ----------
+const PS_BI = { music: 'bi-music-note-beamed', gamepad: 'bi-controller', palette: 'bi-palette', archery: 'bi-bullseye', sparkles: 'bi-stars' };
+const PS_HORSE = '<svg class="ps-svg" viewBox="0 0 512 512" fill="currentColor" fill-rule="evenodd" aria-hidden="true"><path d="M 69 245 L 60 262 L 55 282 L 55 289 L 54 290 L 54 316 L 55 317 L 55 326 L 58 341 L 68 371 L 79 394 L 100 427 L 117 447 L 138 466 L 159 481 L 177 491 L 206 502 L 230 508 L 236 508 L 243 510 L 252 510 L 253 511 L 295 511 L 296 510 L 303 510 L 312 508 L 311 505 L 298 503 L 253 491 L 218 479 L 197 470 L 176 459 L 174 459 L 157 449 L 136 434 L 119 418 L 102 397 L 83 367 L 71 340 L 66 324 L 63 309 L 63 302 L 62 301 L 62 278 L 65 262 L 71 248 L 71 246 Z M 322 202 L 300 214 L 291 221 L 282 231 L 272 250 L 268 267 L 267 283 L 268 284 L 269 303 L 273 321 L 279 339 L 283 346 L 286 355 L 297 375 L 322 409 L 328 420 L 332 431 L 335 445 L 335 452 L 336 453 L 335 477 L 332 488 L 332 492 L 334 492 L 340 476 L 342 466 L 342 459 L 343 458 L 343 437 L 342 436 L 341 424 L 335 405 L 328 392 L 314 371 L 305 353 L 297 331 L 291 302 L 291 281 L 292 280 L 293 270 L 297 259 L 301 252 L 313 240 L 331 259 L 344 268 L 356 274 L 374 279 L 391 279 L 391 276 L 370 266 L 362 260 L 347 245 L 332 224 Z M 300 49 L 271 43 L 251 43 L 250 42 L 247 43 L 234 43 L 233 44 L 226 44 L 225 45 L 209 47 L 176 58 L 156 68 L 129 86 L 103 108 L 89 122 L 125 113 L 130 113 L 131 114 L 110 128 L 84 149 L 64 169 L 50 186 L 36 208 L 31 218 L 25 234 L 20 260 L 54 235 L 69 227 L 76 226 L 76 224 L 70 223 L 60 225 L 44 232 L 42 231 L 47 221 L 61 201 L 99 162 L 140 128 L 180 101 L 156 95 L 148 95 L 138 97 L 137 96 L 144 90 L 176 69 L 198 59 L 216 53 L 234 49 L 248 48 L 249 47 L 276 47 L 299 51 Z M 402 0 L 368 9 L 346 19 L 329 31 L 318 43 L 314 50 L 317 51 L 324 44 L 333 38 L 352 29 L 379 22 L 382 23 L 382 28 L 381 29 L 381 56 L 382 57 L 382 66 L 387 92 L 399 105 L 411 123 L 430 156 L 445 186 L 455 211 L 457 219 L 471 242 L 476 256 L 476 274 L 472 289 L 470 293 L 463 300 L 451 306 L 444 308 L 432 308 L 423 304 L 412 293 L 404 280 L 402 281 L 406 297 L 411 306 L 417 313 L 421 316 L 435 322 L 450 322 L 464 318 L 474 313 L 484 303 L 488 295 L 491 284 L 491 265 L 488 253 L 484 244 L 463 217 L 442 155 L 428 120 L 418 101 L 404 81 L 402 57 L 401 56 L 401 45 L 400 44 L 400 29 L 401 28 L 402 16 L 407 0 Z"/></svg>';
+// Un nom connu => pictogramme ; sinon le texte tel quel (un emoji reste possible)
+const psIcon = name => name === 'horse' ? PS_HORSE : (PS_BI[name] ? `<i class="bi ${PS_BI[name]} ps-bi" aria-hidden="true"></i>` : (name || ''));
+
+// ---------- Musique : lecteur Spotify intégré (iframe) + liste des titres ----------
+function psView(t) {
+    return { title: pT(t.title), artist: pT(t.artist), album: pT(t.album), cover: t.cover || '' };
+}
+
+// Accepte : un lien Spotify, "spotify:track:ID", ou le code <iframe> copié depuis Spotify
+function psEmbedSrc(s) {
+    if (!s) return '';
+    const frame = String(s).match(/src="([^"]+)"/);
+    if (frame) s = frame[1];
+    s = String(s).trim();
+    const m = s.match(/open\.spotify\.com\/(?:intl-[a-z-]+\/)?(?:embed\/)?(track|album|playlist|episode|show|artist)\/([A-Za-z0-9]+)/) ||
+              s.match(/^spotify:(track|album|playlist|episode|show|artist):([A-Za-z0-9]+)/);
+    return m ? `https://open.spotify.com/embed/${m[1]}/${m[2]}?utm_source=generator&theme=0` : '';
+}
+
+function generatePassions() {
+    const sec = document.getElementById('passions');
+    if (!sec || !portfolioData.passions) return;
+    const P = portfolioData.passions, eq = P.equestrian, mu = P.music, ga = P.games, ot = P.others;
+    const fr = currentLang === 'fr';
+    psIdx = 0; psPhotos = eq.photos || [];
+    const head = (icon, title, sub) => `<div class="ps-head"><span class="ps-emoji">${psIcon(icon)}</span><div><h3>${pT(title)}</h3>${sub ? `<p>${pT(sub)}</p>` : ''}</div></div>`;
+    const cover = (src) => `<span class="ps-cover">${src ? `<img src="${src}" alt="" loading="lazy" decoding="async" onerror="this.remove()">` : ''}</span>`;
+
+    sec.innerHTML = `
+        <div class="section-header">
+            <h2>${pT(P.header.title)}</h2>
+            <p>${pT(P.header.subtitle)}</p>
+        </div>
+
+        <div class="ps-block ps-horse reveal">
+            <div class="ps-horse-info">
+                <span class="ps-label">${pT(eq.label)}</span>
+                <h3 class="ps-title">${psIcon(eq.icon)} ${pT(eq.title)}</h3>
+                <div class="ps-since"><strong>${eq.since.value}</strong><span>${pT(eq.since)}</span></div>
+                ${eq.paragraphs.map(p => `<p>${pT(p)}</p>`).join('')}
+                <h4>${pT(eq.levelsTitle)}</h4>
+                <ol class="ps-levels">${eq.levels.map(l => `<li class="${l.done ? 'done' : 'todo'}">${pT(l.label)}</li>`).join('')}</ol>
+            </div>
+            <div class="ps-mosaic">
+                ${psPhotos.map((ph, i) => `
+                    <figure class="ps-photo" data-i="${i}" tabindex="0" role="button" aria-label="${pT(ph.title)}">
+                        <img src="${ph.src}" alt="${pT(ph.title)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('noimg');this.remove()">
+                        <figcaption><strong>${pT(ph.title)}</strong><span>${pT(ph.text)}</span></figcaption>
+                    </figure>`).join('')}
+            </div>
+        </div>
+
+        <div class="ps-block ps-music reveal">
+            ${head(mu.icon, mu.title, mu.subtitle)}
+            <div class="ps-player">
+                <div class="ps-stage"><div id="psEmbed" class="ps-embed"></div></div>
+                <div class="ps-side">
+                    <ol class="ps-tracks">
+                        ${mu.tracks.map((t, i) => { const v = psView(t); return `
+                            <li data-i="${i}" tabindex="0">
+                                <span class="n">${i + 1}</span>${cover(v.cover)}
+                                <div class="txt"><b>${v.title}</b><small>${[v.artist, v.album].filter(Boolean).join(' · ')}</small></div>
+                                <span class="ps-eq mini"><i></i><i></i><i></i></span>
+                            </li>`; }).join('')}
+                    </ol>
+                    <p class="ps-tip">${fr ? 'Choisis un titre, puis appuie sur play dans le lecteur.' : 'Pick a track, then hit play in the player.'}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ps-block ps-games reveal">
+            ${head(ga.icon, ga.title, ga.subtitle)}
+            <div class="ps-cards">
+                ${ga.items.map((g, i) => `
+                    <article class="ps-card">
+                        <span class="rank">#${i + 1}</span>
+                        <div class="ps-card-img">${g.image ? `<img src="${g.image}" alt="${pT(g.name)}" loading="lazy" decoding="async" onerror="this.remove()">` : ''}<span class="fallback">${psIcon('gamepad')}</span></div>
+                        <div class="ps-card-body">
+                            <h4>${pT(g.name)}</h4>
+                            <small>${pT(g.platform)}</small>
+                            <p>${pT(g.text)}</p>
+                            ${g.link ? `<a href="${g.link}" target="_blank" rel="noopener">${fr ? 'Découvrir' : 'Check it out'} <i class="bi bi-arrow-up-right"></i></a>` : ''}
+                        </div>
+                    </article>`).join('')}
+            </div>
+        </div>
+
+        <div class="ps-block ps-others reveal">
+            ${head('sparkles', ot.title)}
+            <div class="ps-other-grid">
+                ${ot.items.map(o => `<div class="ps-other"><span class="ico">${psIcon(o.icon)}</span><h4>${pT(o.title)}</h4><p>${pT(o.text)}</p></div>`).join('')}
+            </div>
+        </div>`;
+    initPassions();
+}
+
+function psSelect(i, instant) {
+    const tracks = portfolioData.passions.music.tracks, box = document.getElementById('psEmbed');
+    if (!tracks.length || !box) return;
+    psIdx = (i + tracks.length) % tracks.length;
+    document.querySelectorAll('.ps-tracks li').forEach((li, k) => li.classList.toggle('active', k === psIdx));
+    const t = tracks[psIdx], src = psEmbedSrc(t.spotify), v = psView(t), fr = currentLang === 'fr';
+    const render = () => {
+        if (!src) {
+            box.innerHTML = `<div class="ps-embed-empty">${psIcon('music')}<span>${fr ? 'Écoute bientôt disponible' : 'Listening coming soon'}</span></div>`;
+        } else if (!psActivated) {
+            // Le lecteur Spotify (contenu tiers) ne se charge qu'au clic : plus rapide et plus respectueux de la vie privée
+            box.innerHTML = `
+                <button type="button" class="ps-facade">
+                    <span class="ps-facade-cover">${v.cover ? `<img src="${v.cover}" alt="" onerror="this.remove()">` : ''}</span>
+                    <span class="ps-facade-title">${v.title}</span>
+                    <span class="ps-facade-artist">${v.artist}</span>
+                    <span class="ps-facade-play"><i class="bi bi-play-fill"></i> ${fr ? 'Écouter' : 'Listen'}</span>
+                    <small>${fr ? 'Charge le lecteur Spotify (contenu tiers)' : 'Loads the Spotify player (third-party content)'}</small>
+                </button>`;
+        } else {
+            box.innerHTML = `<iframe title="Spotify" src="${src}" width="100%" height="352" style="border:0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`;
+        }
+        box.classList.remove('swap');
+    };
+    if (instant) render(); else { box.classList.add('swap'); setTimeout(render, 220); }
+}
+
+function psLightboxShow(i) {
+    const lb = document.getElementById('psLightbox');
+    if (!lb || !psPhotos.length) return;
+    psLbI = (i + psPhotos.length) % psPhotos.length;
+    const ph = psPhotos[psLbI], media = lb.querySelector('.ps-lb-media');
+    const img = new Image();
+    img.alt = pT(ph.title);
+    img.onerror = () => { media.innerHTML = `<div class="ps-lb-fallback">${psIcon('horse')}</div>`; };
+    img.src = ph.src;
+    media.innerHTML = '';
+    media.appendChild(img);
+    lb.querySelector('h4').textContent = pT(ph.title);
+    lb.querySelector('p').textContent = pT(ph.text);
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function psLightboxClose() {
+    const lb = document.getElementById('psLightbox');
+    if (lb) lb.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function initPassions() {
+    // Lightbox (au niveau du body pour rester en plein écran)
+    if (!document.getElementById('psLightbox')) {
+        const lb = document.createElement('div');
+        lb.id = 'psLightbox';
+        lb.className = 'ps-lightbox';
+        lb.innerHTML = '<button class="ps-lb-btn ps-lb-close" aria-label="Close"><i class="bi bi-x-lg"></i></button>' +
+            '<button class="ps-lb-btn ps-lb-prev" aria-label="Previous"><i class="bi bi-chevron-left"></i></button>' +
+            '<button class="ps-lb-btn ps-lb-next" aria-label="Next"><i class="bi bi-chevron-right"></i></button>' +
+            '<figure><div class="ps-lb-media"></div><figcaption><h4></h4><p></p></figcaption></figure>';
+        document.body.appendChild(lb);
+        lb.addEventListener('click', e => {
+            if (e.target.closest('.ps-lb-prev')) psLightboxShow(psLbI - 1);
+            else if (e.target.closest('.ps-lb-next')) psLightboxShow(psLbI + 1);
+            else if (e.target === lb || e.target.closest('.ps-lb-close')) psLightboxClose();
+        });
+        document.addEventListener('keydown', e => {
+            if (!lb.classList.contains('active')) return;
+            if (e.key === 'Escape') psLightboxClose();
+            else if (e.key === 'ArrowLeft') psLightboxShow(psLbI - 1);
+            else if (e.key === 'ArrowRight') psLightboxShow(psLbI + 1);
+        });
+    }
+    document.querySelectorAll('.ps-photo').forEach(f => {
+        const open = () => psLightboxShow(parseInt(f.dataset.i, 10));
+        f.addEventListener('click', open);
+        f.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+    });
+
+    // Liste des titres -> change le lecteur Spotify
+    document.querySelectorAll('.ps-tracks li').forEach(li => {
+        const go = () => psSelect(parseInt(li.dataset.i, 10), false);
+        li.addEventListener('click', go);
+        li.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } });
+    });
+    document.getElementById('psEmbed')?.addEventListener('click', e => {
+        if (e.target.closest('.ps-facade')) { psActivated = true; psSelect(psIdx, true); }
+    });
+    psSelect(0, true);
+
+    // Effet 3D léger sur les cartes de jeux (souris uniquement)
+    if (window.matchMedia('(hover: hover)').matches) {
+        document.querySelectorAll('.ps-card').forEach(c => {
+            c.addEventListener('pointermove', e => {
+                const r = c.getBoundingClientRect();
+                c.style.setProperty('--ry', (((e.clientX - r.left) / r.width) - .5) * 10 + 'deg');
+                c.style.setProperty('--rx', (-(((e.clientY - r.top) / r.height) - .5)) * 10 + 'deg');
+            });
+            c.addEventListener('pointerleave', () => { c.style.setProperty('--rx', '0deg'); c.style.setProperty('--ry', '0deg'); });
+        });
+    }
+
+    // Apparition au scroll
+    const blocks = document.querySelectorAll('#passions .reveal');
+    if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
+        blocks.forEach(b => io.observe(b));
+    } else blocks.forEach(b => b.classList.add('in'));
+}
+
+// ==================== BADGE « RECHERCHE DE STAGE » ====================
+function availabilityHtml() {
+    const A = portfolioData.availability, p = portfolioData.profile, fr = currentLang === 'fr';
+    if (!A) return '';
+    const rows = A.rows.slice();
+    if (pT(A.period)) rows.push({ icon: 'bi-calendar-event', label: { fr: 'Période', en: 'Period' }, text: A.period });
+    return `
+        <div class="avail">
+            <button type="button" class="avail-badge" aria-expanded="false" aria-controls="availPanel">
+                <span class="avail-dot"></span><span>${pT(A.badge)}</span><i class="bi bi-chevron-down"></i>
+            </button>
+            <div class="avail-panel" id="availPanel" role="dialog" aria-label="${pT(A.title)}">
+                <h3>${pT(A.title)}</h3>
+                <ul>${rows.map(r => `<li><i class="bi ${r.icon}"></i><div><small>${pT(r.label)}</small><span>${pT(r.text)}</span></div></li>`).join('')}</ul>
+                <div class="avail-cta">
+                    <a class="btn btn-primary" href="mailto:${p.email}">${fr ? "M'écrire" : 'Email me'}</a>
+                    <a class="btn btn-secondary" href="${p.cv[currentLang]}" download target="_blank" rel="noopener">CV</a>
+                </div>
+            </div>
+        </div>`;
+}
+
+function closeAvailability() {
+    const w = document.querySelector('.avail');
+    if (!w) return;
+    w.classList.remove('open');
+    const b = w.querySelector('.avail-badge');
+    if (b) b.setAttribute('aria-expanded', 'false');
+}
+
+// ==================== MENTIONS LÉGALES ====================
+function openLegal() {
+    let ov = document.getElementById('legalModal');
+    if (!ov) {
+        ov = document.createElement('div');
+        ov.id = 'legalModal';
+        ov.className = 'modal-overlay legal-overlay';
+        ov.innerHTML = '<div class="modal-container"><button class="modal-close" aria-label="Close"><i class="bi bi-x-lg"></i></button><div class="modal-content" id="legalContent"></div></div>';
+        document.body.appendChild(ov);
+        ov.addEventListener('click', e => { if (e.target === ov || e.target.closest('.modal-close')) closeLegal(); });
+    }
+    const L = portfolioData.legal, email = portfolioData.profile.email;
+    document.getElementById('legalContent').innerHTML =
+        `<div class="modal-header"><h2>${pT(L.title)}</h2></div><div class="modal-body">` +
+        L.sections.map(s => `<div class="modal-section"><h3>${pT(s.h)}</h3><p>${pT(s.p).replace('{email}', `<a href="mailto:${email}">${email}</a>`)}</p></div>`).join('') + '</div>';
+    requestAnimationFrame(() => ov.classList.add('active'));
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLegal() {
+    const ov = document.getElementById('legalModal');
+    if (ov) ov.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Clics / clavier gérés une seule fois (les blocs concernés sont régénérés au changement de langue)
+document.addEventListener('click', e => {
+    const wrap = document.querySelector('.avail');
+    if (wrap) {
+        if (e.target.closest('.avail-badge')) {
+            wrap.classList.toggle('open');
+            wrap.querySelector('.avail-badge').setAttribute('aria-expanded', wrap.classList.contains('open'));
+        } else if (!e.target.closest('.avail-panel')) closeAvailability();
+    }
+    if (e.target.closest('.legal-link')) openLegal();
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeAvailability(); closeLegal(); }
+});

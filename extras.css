@@ -1,0 +1,65 @@
+/* ===== Palette issue de la bannière LinkedIn (pêche / lavande / ciel) en plus du cyan existant ===== */
+@property --amb1 { syntax: '<color>'; inherits: true; initial-value: rgba(79,195,247,.16); }
+@property --amb2 { syntax: '<color>'; inherits: true; initial-value: rgba(184,164,227,.12); }
+:root { --lav: #b8a4e3; --peach: #ffbf99; }
+body { transition: --amb1 1s, --amb2 1s; --amb1: rgba(79,195,247,.16); --amb2: rgba(184,164,227,.12); }
+body[data-amb="competences"] { --amb1: rgba(184,164,227,.2);  --amb2: rgba(79,195,247,.1); }
+body[data-amb="diplomes"]    { --amb1: rgba(255,191,153,.16); --amb2: rgba(184,164,227,.12); }
+body[data-amb="experience"]  { --amb1: rgba(79,195,247,.2);   --amb2: rgba(255,191,153,.1); }
+body[data-amb="realisations"]{ --amb1: rgba(184,164,227,.2);  --amb2: rgba(79,195,247,.14); }
+body[data-amb="contact"]     { --amb1: rgba(255,191,153,.2);  --amb2: rgba(79,195,247,.14); }
+body::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(60% 50% at 85% 15%, var(--amb1), transparent 70%),
+              radial-gradient(55% 55% at 8% 92%, var(--amb2), transparent 70%); }
+#threejs-canvas { transition: opacity .8s ease; }
+body.past-hero #threejs-canvas { opacity: 0; }
+
+/* ===== Chargement mobile : sections hors écran rendues à la demande ===== */
+section:not(#presentation) { content-visibility: auto; contain-intrinsic-size: auto 700px; }
+
+/* ===== Navigation flottante (desktop) ===== */
+@media (min-width: 769px) {
+  nav { top: 12px; left: 50%; width: min(94%, 1240px); transform: translateX(-50%); border-radius: 18px;
+        min-height: 64px; padding: .6rem 1.6rem; border: 1px solid rgba(79,195,247,.25); }
+  nav.scrolled { padding: .5rem 1.6rem; }
+}
+
+/* ===== Rail de sections à gauche ===== */
+#sideRail { position: fixed; left: 18px; top: 50%; transform: translateY(-50%); z-index: 900;
+  display: none; flex-direction: column; gap: 14px; }
+@media (min-width: 1200px) { #sideRail { display: flex; } }
+#sideRail a { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-muted); font-size: .85rem; }
+#sideRail i { width: 8px; height: 8px; border-radius: 50%; background: currentColor; opacity: .5; transition: var(--transition); flex-shrink: 0; }
+#sideRail span { max-width: 0; overflow: hidden; white-space: nowrap; opacity: 0; transition: max-width .4s ease, opacity .3s ease; }
+#sideRail a:hover span, #sideRail a:focus-visible span { max-width: 160px; opacity: .8; }
+#sideRail a.past { color: var(--text-muted); } #sideRail a.past i { opacity: .8; }
+#sideRail a.on { color: var(--primary-color); font-weight: 700; }
+#sideRail a.on i { width: 22px; border-radius: 4px; opacity: 1; background: linear-gradient(90deg, var(--primary-color), var(--lav)); }
+#sideRail a.on span { max-width: 180px; opacity: 1; }
+
+/* ===== Badge "réalisé en stage" ===== */
+.stage-badge { display: inline-flex; align-items: center; gap: .4rem; margin: .2rem 0 .6rem; padding: .25rem .7rem;
+  border-radius: 20px; font-size: .78rem; font-weight: 600; color: #3b2a1a;
+  background: linear-gradient(90deg, var(--peach), #ffd9bf); }
+.modal-header .stage-badge { font-size: .9rem; margin-top: 0; }
+
+/* ===== Footer ===== */
+#siteFooter { text-align: center; padding: 3rem 5% 2.5rem; margin-top: 3rem; color: var(--text-muted);
+  border-top: 1px solid rgba(79,195,247,.2); background: linear-gradient(180deg, transparent, rgba(184,164,227,.08)); }
+#siteFooter strong { color: var(--text-color); }
+#siteFooter .ft-line { margin: .3rem auto; font-size: .9rem; max-width: 70ch; }
+#siteFooter .ft-links { display: flex; justify-content: center; gap: 1.2rem; margin: 1rem 0; font-size: 1.4rem; }
+#siteFooter .ft-links a { color: var(--primary-color); transition: var(--transition); }
+#siteFooter .ft-links a:hover { color: var(--lav); transform: translateY(-3px); }
+
+/* ===== Mobile : plus léger et plus clair ===== */
+@media (max-width: 768px) {
+  .profile-image-container { animation: none; }
+  .profile-ring, .logo { animation: none; }
+  .gradient-text { animation: none; }
+  nav { backdrop-filter: none; background: var(--card-bg); }
+  .project-card:hover, .tech-badge:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}

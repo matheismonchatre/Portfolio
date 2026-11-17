@@ -18,17 +18,17 @@ const portfolioData = {
         },
         description: {
             fr: [
-                "Développeur web passionné par la création de sites modernes et dynamiques. Étudiant en BUT MMI à l'IUT de Blois, j'allie technique et créativité pour concevoir des interfaces interactives et intuitives.",
+                "Développeur web, aujourd'hui en première année de Master MTI3D à Laval, je suis curieux et passionné par les innovations technologiques et la réalité virtuelle. De joueur à concepteur, je mets ma créativité et mes compétences techniques au service de projets interactifs et immersifs variés.",
                 "Passionné de sport, notamment d'équitation que je pratique depuis plusieurs années, j'aime aussi l'art et le dessin. Les jeux vidéo et les animations ont marqué mon enfance et continuent de m'inspirer dans mon travail créatif."
             ],
             en: [
-                "Web developer passionate about creating modern and dynamic websites. Student in BUT MMI at IUT de Blois, I combine technical skills and creativity to design interactive and intuitive interfaces.",
+                "Web developer, currently in the first year of the MTI3D Master's in Laval, I am curious and passionate about technological innovation and virtual reality. From player to designer, I put my creativity and technical skills to work on varied interactive and immersive projects.",
                 "Sports enthusiast, especially horse riding which I have practiced for several years, I also love art and drawing. Video games and animations shaped my childhood and continue to inspire my creative work."
             ]
         },
         keywords: {
-            fr: ["Développeur web", "Créatif", "Curieux", "Passionné"],
-            en: ["web developer", "Creative", "Curious", "Passionate"]
+            fr: ["Développeur web", "Créatif", "Curieux", "Passionné", "Immersif"],
+            en: ["web developer", "Creative", "Curious", "Passionate", "Immersive"]
         }
     },
 
@@ -53,23 +53,6 @@ const portfolioData = {
             ]
         },
         {
-            id: "backend",
-            icon: "bi-server",
-            title: {
-                fr: "Back-end",
-                en: "Back-end"
-            },
-            items: [
-                { name: "PHP / SQL", level: 85 },
-                { name: "Laravel", level: 65 },
-                { name: "Symfony", level: 75 },
-                { name: "NodeJs / Express", level: 50 },
-                { name: "Python / Flask", level: 60 },
-                { name: "Git", level: 80 },
-                { name: "Docker", level: 50 }
-            ]
-        },
-        {
             id: "CMS",
             icon: "bi-grid-1x2-fill",
             title: {
@@ -78,7 +61,7 @@ const portfolioData = {
             },
             items: [
                 { name: "WordPress", level: 75 },
-                { name: "Joomla", level: 30 },
+                { name: "Joomla", level: 60 },
 
             ]
         },
@@ -91,8 +74,35 @@ const portfolioData = {
             },
             items: [
                 { name: "Figma", level: 70 },
-                { name: "Blender", level: 60 },
                 { name: "App Adobe", level: 75 }
+            ]
+        },
+        {
+            id: "modeling3d",
+            icon: "bi-box",
+            title: { fr: "Modélisation 3D & autres", en: "3D Modeling & more" },
+            items: [
+                { name: "Unity", level: 80 },
+                { name: "Blender", level: 75 },
+                { name: "Fusion", level: 70 }
+            ]
+        },
+        {
+            id: "backend",
+            icon: "bi-server",
+            title: {
+                fr: "Back-end",
+                en: "Back-end"
+            },
+            items: [
+                { name: "PHP / SQL", level: 85 },
+                { name: "Laravel", level: 65 },
+                { name: "Symfony", level: 75 },
+                { name: "NodeJs / Express", level: 50 },
+                { name: "Python / Flask", level: 60 },
+                { name: "C++", level: 70 },
+                { name: "Git", level: 80 },
+                { name: "Docker", level: 50 }
             ]
         },
         {
@@ -131,7 +141,7 @@ const portfolioData = {
                 { name: { fr: "Mécanique des forces", en: "Mechanics of Forces" }, level: 70 }
 
             ]
-        },
+        }
     ],
 
     // Expériences ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -140,14 +150,14 @@ const portfolioData = {
             id: "exp1",
             year: "2026",
             time: "15 semaines",
-            company: "Pixim - Saumur",
+            company: "Pixim Communication - Saumur",
             role: {
-                fr: "Stage en entreprise",
-                en: "Internship"
+                fr: "Stage - Développeur front & back end",
+                en: "Internship - Front & back end developer"
             },
             description: {
-                fr: "Développement d'un dashboard interactif avec Joomla pour venir géré la gestion des sites héberger de l'entreprise, développement d'applications web plus aide dévellopeur.",
-                en: "Development of an interactive dashboard with Joomla to manage the company's hosted websites, development of web applications and developer assistance."
+                fr: "Développement de plusieurs sites internet avec Joomla (Domaine de Nerleux, Timmerman traiteur à Saumur, pages du Domaine de Bourgueil) et d'une application administrative en React et Symfony pour gérer les sites et domaines de l'agence.",
+                en: "Development of several websites with Joomla (Domaine de Nerleux, Timmerman caterer in Saumur, pages of the Domaine de Bourgueil) and of an administrative application in React and Symfony to manage the agency's websites and domains."
             }
         },
         {
@@ -193,7 +203,7 @@ const portfolioData = {
             }
         },
         {
-            id: "exp4",
+            id: "exp5",
             year: "2019",
             time: "1 semaine",
             company: "PMB - Château-du-Loir",
@@ -210,6 +220,16 @@ const portfolioData = {
 
     // Diplômes
     diplomas: [
+        {
+            id: "dip0",
+            year: "2026-2028",
+            title: { fr: "Master MTI3D", en: "MTI3D Master's" },
+            institution: "Laval Virtual Center - Laval",
+            description: {
+                fr: "Master Management des Technologies Interactives 3D : réalité virtuelle, projets interactifs et immersifs.",
+                en: "Master's in Management of 3D Interactive Technologies: virtual reality, interactive and immersive projects."
+            }
+        },
         {
             id: "dip1",
             year: "2023-2026",
@@ -378,6 +398,34 @@ const portfolioData = {
                 github: "#"
             },
             {
+                id: "project-dev-11",
+                title: "Selexini - Recherche lexicale",
+                category: "dev",
+                thumbnail: "./img/dev/selexini.png",
+                images: ["./img/dev/selexini.png"],
+                tags: ["Recherche lexicale", "Multilingue", "Stage"],
+                internship: { fr: "Réalisé pendant mon stage à l'IUT de Blois (laboratoire LIFAT)", en: "Built during my internship at IUT de Blois (LIFAT laboratory)" },
+                shortDescription: {
+                    fr: "Extension d'un site existant avec une recherche lexicale par mot, multilingue",
+                    en: "Extension of an existing website with a multilingual, word-based lexical search"
+                },
+                fullDescription: {
+                    fr: "Selexini est un projet de recherche (ANR) autour de l'induction de lexiques sémantiques, auquel participe le LIFAT à Blois. Durant mon stage, j'ai réalisé une extension du site existant pour y ajouter un système de recherche lexicale par mot, disponible en plusieurs langues.",
+                    en: "Selexini is a research project (ANR) on semantic lexicon induction, in which the LIFAT laboratory in Blois takes part. During my internship, I built an extension of the existing website to add a word-based lexical search system, available in several languages."
+                },
+                technologies: ["Recherche lexicale", "Multilingue", "Extension de site"],
+                features: {
+                    fr: ["Recherche lexicale par mot", "Recherche multilingue", "Extension intégrée au site existant"],
+                    en: ["Word-based lexical search", "Multilingual search", "Extension integrated into the existing website"]
+                },
+                challenges: {
+                    fr: "Étendre un site existant avec un système de recherche multilingue sans perturber son fonctionnement.",
+                    en: "Extending an existing website with a multilingual search system without disrupting how it works."
+                },
+                link: "https://selexini.lis-lab.fr",
+                github: "#"
+            },
+            {
                 id: "project-dev-4",
                 title: "Olympeak - Application Web",
                 category: "dev",
@@ -465,6 +513,109 @@ const portfolioData = {
                 challenges: {
                     fr: "Créer un endroit dédié à la gestion d'évènements sportifs, pour tous les athlètes et passionnés de sport.",
                     en: "Creating a dedicated place for sports event management, for all athletes and sports enthusiasts."
+                },
+                link: "http://sportivea.alwaysdata.net",
+                github: "#"
+            }
+            ,
+            {
+                id: "project-dev-6",
+                title: "Domaine de Nerleux - Site Joomla",
+                category: "dev",
+                thumbnail: "./img/dev/nerleux.png",
+                images: ["./img/dev/nerleux.png"],
+                tags: ["Joomla", "Stage", "CMS"],
+                internship: { fr: "Réalisé pendant mon stage chez Pixim Communication", en: "Built during my internship at Pixim Communication" },
+                shortDescription: { fr: "Site vitrine d'un domaine viticole réalisé en stage avec Joomla", en: "Showcase website for a wine estate, built during my internship with Joomla" },
+                fullDescription: { fr: "Réalisation du site du Domaine de Nerleux avec Joomla, durant mon stage chez Pixim Communication. Intégration des maquettes, mise en place de la structure du CMS et personnalisation du template pour un rendu fidèle à l'identité du domaine.", en: "Creation of the Domaine de Nerleux website with Joomla, during my internship at Pixim Communication. Mockup integration, CMS structure setup and template customisation to match the estate's identity." },
+                technologies: ["Joomla", "HTML5", "CSS3", "PHP"],
+                features: { fr: ["Site réalisé en stage chez Pixim Communication", "Structure de contenu Joomla", "Template personnalisé", "Design responsive"], en: ["Built during an internship at Pixim Communication", "Joomla content structure", "Customised template", "Responsive design"] },
+                challenges: { fr: "Adapter un CMS à l'identité visuelle d'un client tout en gardant un site simple à administrer.", en: "Adapting a CMS to a client's visual identity while keeping the site easy to manage." },
+                link: "#",
+                github: "#"
+            },
+            {
+                id: "project-dev-7",
+                title: "Timmerman - Traiteur de Saumur",
+                category: "dev",
+                thumbnail: "./img/dev/timmerman.png",
+                images: ["./img/dev/timmerman.png"],
+                tags: ["Joomla", "Stage", "CMS"],
+                internship: { fr: "Réalisé pendant mon stage chez Pixim Communication", en: "Built during my internship at Pixim Communication" },
+                shortDescription: { fr: "Site du traiteur Timmerman à Saumur, réalisé en stage avec Joomla", en: "Website for the Timmerman caterer in Saumur, built during my internship with Joomla" },
+                fullDescription: { fr: "Site complet du traiteur Timmerman (Saumur) réalisé avec Joomla lors de mon stage chez Pixim Communication : présentation de l'offre, pages de contenu et mise en page soignée pour le client.", en: "Complete website for the Timmerman caterer (Saumur) built with Joomla during my internship at Pixim Communication: offer presentation, content pages and a polished layout for the client." },
+                technologies: ["Joomla", "HTML5", "CSS3", "PHP"],
+                features: { fr: ["Site réalisé en stage chez Pixim Communication", "Pages de présentation de l'offre", "Gestion de contenu simple pour le client", "Design responsive"], en: ["Built during an internship at Pixim Communication", "Offer presentation pages", "Simple content management for the client", "Responsive design"] },
+                challenges: { fr: "Livrer un site clair et facile à mettre à jour par le client, dans les délais du stage.", en: "Delivering a clear site the client can easily update, within the internship timeframe." },
+                link: "#",
+                github: "#"
+            },
+            {
+                id: "project-dev-8",
+                title: "Domaine de Bourgueil - Pages Joomla",
+                category: "dev",
+                thumbnail: "./img/dev/bourgueil.png",
+                images: ["./img/dev/bourgueil.png"],
+                tags: ["Joomla", "Stage", "CMS"],
+                internship: { fr: "Réalisé pendant mon stage chez Pixim Communication", en: "Built during my internship at Pixim Communication" },
+                shortDescription: { fr: "Réalisation de plusieurs pages du site du Domaine de Bourgueil", en: "Creation of several pages of the Domaine de Bourgueil website" },
+                fullDescription: { fr: "Contribution au site du Domaine de Bourgueil sous Joomla pendant mon stage chez Pixim Communication : j'ai réalisé certains éléments et certaines pages du site, en cohérence avec le reste de l'existant.", en: "Contribution to the Domaine de Bourgueil website on Joomla during my internship at Pixim Communication: I built some page elements and pages, consistent with the existing site." },
+                technologies: ["Joomla", "HTML5", "CSS3"],
+                features: { fr: ["Contribution réalisée en stage chez Pixim Communication", "Pages et éléments de page", "Cohérence avec l'existant"], en: ["Contribution made during an internship at Pixim Communication", "Pages and page elements", "Consistency with the existing site"] },
+                challenges: { fr: "Intégrer mes pages dans un site existant sans casser sa cohérence visuelle.", en: "Integrating my pages into an existing site without breaking its visual consistency." },
+                link: "#",
+                github: "#"
+            },
+            {
+                id: "project-dev-9",
+                title: "Pixim Admin - Back-office",
+                category: "dev",
+                thumbnail: "./img/dev/pixim-admin.png",
+                images: ["./img/dev/pixim-admin.png"],
+                tags: ["React", "Symfony", "Stage", "Admin"],
+                internship: { fr: "Réalisé pendant mon stage chez Pixim Communication", en: "Built during my internship at Pixim Communication" },
+                shortDescription: { fr: "Application d'administration pour gérer les sites et domaines de l'agence", en: "Administration app to manage the agency's websites and domains" },
+                fullDescription: { fr: "Application administrative créée pour l'agence Pixim Communication afin de gérer son portefeuille de sites internet, les domaines liés aux adresses e-mail et son serveur interne. Elle comprend un système d'authentification avec un super utilisateur et des utilisateurs classiques. Une évolution vers la comptabilité est prévue.", en: "Administration application created for the agency Pixim Communication to manage its portfolio of websites, the domains linked to email addresses and its internal server. It includes authentication with a super user and standard users. An evolution towards accounting is planned." },
+                technologies: ["React", "Symfony", "API REST", "SQL"],
+                features: { fr: ["Gestion du portefeuille de sites", "Gestion des domaines et adresses e-mail", "Gestion du serveur interne", "Connexion avec super utilisateur et utilisateurs", "Évolution prévue : comptabilité"], en: ["Website portfolio management", "Domain and email address management", "Internal server management", "Login with super user and standard users", "Planned: accounting module"] },
+                challenges: { fr: "Concevoir une gestion des rôles et des accès fiable, et une base évolutive pour la comptabilité.", en: "Designing reliable role and access management, and a scalable base for accounting." },
+                link: "#",
+                github: "#"
+            },
+            {
+                id: "project-dev-10",
+                title: "Aetheria - Jeu de plateforme",
+                category: "dev",
+                thumbnail: "./img/dev/aetheria.png",
+                images: ["./img/dev/aetheria.png", "./img/dev/aetheria1.png", "./img/dev/aetheria2.png", "./img/dev/aetheria3.png"],
+                tags: ["C++", "SFML", "Jeu vidéo"],
+                
+                shortDescription: { fr: "Jeu de plateforme 2D en C++ avec SFML", en: "2D platformer game in C++ with SFML" },
+                fullDescription: { fr: "Conception d'un jeu de plateforme original en C++ (SFML) respectant un cahier des charges rigoureux, avec gestion des collisions, des mouvements et de la physique des personnages. Le design a été réalisé par mes soins ; face à un délai assez court, certains éléments graphiques ont été générés par IA plutôt que dessinés à la main ou repris de sprite sheets en ligne.", en: "Design of an original platformer in C++ (SFML) meeting strict specifications, with collision handling, movement and character physics. The design was made by me; given a fairly short deadline, some graphic assets were AI-generated rather than hand-drawn or taken from online sprite sheets." },
+                technologies: ["C++", "SFML", "Game design"],
+                features: { fr: ["Gestion des collisions", "Mouvements et physique des personnages", "Plusieurs niveaux et menu", "Design réalisé par mes soins, avec une part d'éléments générés par IA"], en: ["Collision handling", "Character movement and physics", "Several levels and a menu", "Design made by me, with some AI-generated assets"] },
+                challenges: { fr: "Respecter un cahier des charges strict dans un délai court, avec un moteur de jeu et une physique codés en C++.", en: "Meeting strict specifications on a short deadline, with game engine and physics coded in C++." },
+                link: "#",
+                github: "#"
+            },
+            {
+                id: "project-dev-12",
+                title: { fr: "Jeu d'infiltration - Unity", en: "Stealth Game - Unity" },
+                category: "dev",
+                status: { fr: "Projet en cours", en: "Work in progress" },
+                tags: ["Unity", "C#", "Blender", "Jeu vidéo"],
+                shortDescription: {
+                    fr: "Jeu de quête sous Unity : récupérer un objet sans se faire repérer par les militaires",
+                    en: "Unity quest game: retrieve an object without being spotted by the soldiers"
+                },
+                fullDescription: {
+                    fr: "Jeu créé sur Unity, avec des modèles 3D réalisés sur Blender et importés dans le moteur. La plupart des éléments du jeu sont programmés en C#, le langage de Unity. Le joueur doit récupérer un objet sans se faire remarquer par les militaires, qui disposent d'un cône de vision et peuvent réagir de plusieurs façons : tirer ou attraper le joueur. La mission se termine en rejoignant un point d'extraction. Projet en cours de réalisation.",
+                    en: "Game created in Unity, with 3D models made in Blender and imported into the engine. Most of the game is scripted in C#, Unity's language. The player must retrieve an object without being noticed by the soldiers, who have a vision cone and can react in several ways: shooting or grabbing the player. The mission ends by reaching an extraction point. Work in progress."
+                },
+                technologies: ["Unity", "C#", "Blender"],
+                features: {
+                    fr: ["Mission : récupérer un objet sans se faire repérer", "Militaires avec cône de vision", "Réactions des militaires : tirer ou attraper le joueur", "Point d'extraction pour terminer la mission", "Modèles 3D réalisés sur Blender"],
+                    en: ["Mission: retrieve an object without being spotted", "Soldiers with a vision cone", "Soldier reactions: shoot or grab the player", "Extraction point to complete the mission", "3D models made in Blender"]
                 },
                 link: "#",
                 github: "#"
@@ -627,6 +778,55 @@ const portfolioData = {
                     ]
                 },
                 link: "#"
+            },
+            {
+                id: "project-design-6",
+                title: { fr: "Séance photo - Groupe de musique", en: "Photo Shoot - Music Band" },
+                category: "design",
+                icon: "bi-camera-fill",
+                badgeIcon: "bi-mortarboard-fill",
+                internship: { fr: "Réalisé lors d'une SAE (projet tutoré)", en: "Made during a SAE (tutored project)" },
+                // Si tu obtiens quelques photos : ajoute "thumbnail" et "images": [...] puis supprime "imageNote".
+                imageNote: {
+                    fr: "Pour des raisons de droit à l'image, je ne peux pas afficher les photos de ce projet, mais je peux vous en parler.",
+                    en: "For image rights reasons, I can't display the photos from this project, but I'm happy to talk about it."
+                },
+                tags: ["Photographie", "Prise de vue", "SAE"],
+                shortDescription: {
+                    fr: "Séance photo réalisée pour un groupe de musique lors d'une SAE",
+                    en: "Photo shoot made for a music band during a SAE"
+                },
+                fullDescription: {
+                    fr: "Dans le cadre d'une SAE (projet tutoré) en lien avec un groupe de musique, j'ai réalisé une séance de photographie et de prise de vue.",
+                    en: "As part of a SAE (tutored project) connected to a music band, I carried out a photography and shooting session."
+                },
+                technologies: ["Photographie", "Prise de vue"],
+                features: {
+                    fr: ["Séance de photographie et prise de vue", "Projet tutoré (SAE) en lien avec un groupe de musique"],
+                    en: ["Photography and shooting session", "Tutored project (SAE) connected to a music band"]
+                },
+                link: "#"
+            },
+            {
+                id: "project-design-5",
+                title: { fr: "Île 3D - Scène Blender & Unity VR", en: "3D Island - Blender & Unity VR Scene" },
+                category: "design",
+                status: { fr: "Projet en cours", en: "Work in progress" },
+                tags: ["3D", "Blender", "Unity", "VR"],
+                shortDescription: {
+                    fr: "Scène 3D d'une île insulaire modélisée sur Blender, explorable sous Unity en VR ou en déplacement classique",
+                    en: "3D scene of a tropical island modeled in Blender, explorable in Unity in VR or with standard movement"
+                },
+                fullDescription: {
+                    fr: "Réalisation d'une scène 3D sur le thème d'une île insulaire. L'île est modélisée sur Blender, puis importée dans Unity pour être explorée directement en réalité virtuelle ou en mode classique, en se déplaçant comme dans un jeu. Projet en cours de réalisation.",
+                    en: "Creation of a 3D scene themed around an island. The island is modeled in Blender, then imported into Unity so it can be explored directly in virtual reality or in standard mode, moving around like in a game. Work in progress."
+                },
+                technologies: ["Blender", "Unity", "VR"],
+                features: {
+                    fr: ["Modélisation 3D d'une île sur Blender", "Import et mise en scène dans Unity", "Visite en réalité virtuelle (VR)", "Visite en déplacement classique, comme dans un jeu"],
+                    en: ["3D modeling of an island in Blender", "Import and scene setup in Unity", "Virtual reality (VR) visit", "Standard movement visit, like in a game"]
+                },
+                link: "#"
             }
         ],
         // Animation ------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -743,6 +943,116 @@ const portfolioData = {
     },
 
     // Navigation ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // ==================== RECHERCHE DE STAGE (badge + fenêtre sur l'accueil) ====================
+    availability: {
+        badge: { fr: "Recherche de stage", en: "Open to internships" },
+        title: { fr: "Je recherche un stage", en: "I'm looking for an internship" },
+        rows: [
+            { icon: "bi-code-slash", label: { fr: "Domaine", en: "Field" }, text: { fr: "Développement web, 3D & réalité virtuelle", en: "Web development, 3D & virtual reality" } },
+            { icon: "bi-geo-alt-fill", label: { fr: "Basé à", en: "Based in" }, text: { fr: "Le Lude (Sarthe, 72)", en: "Le Lude (Sarthe, 72), France" } },
+            { icon: "bi-map", label: { fr: "Zone", en: "Area" }, text: { fr: "Pays de la Loire et au-delà : Le Mans, Angers, Laval, Nantes, Tours…", en: "Pays de la Loire and beyond: Le Mans, Angers, Laval, Nantes, Tours…" } },
+            { icon: "bi-car-front-fill", label: { fr: "Mobilité", en: "Mobility" }, text: { fr: "Véhiculé, prêt à me déplacer", en: "I have a car and I'm ready to travel" } }
+        ],
+        // Dates / durée du stage : s'affichent seulement si tu les renseignes (ex. fr: "Avril à août 2027 (16 semaines)")
+        period: { fr: "", en: "" }
+    },
+
+    // ==================== MENTIONS LÉGALES ====================
+    legal: {
+        link: { fr: "Mentions légales", en: "Legal notice" },
+        title: { fr: "Mentions légales", en: "Legal notice" },
+        sections: [
+            { h: { fr: "Éditeur du site", en: "Website publisher" },
+              p: { fr: "Site personnel à but non commercial, édité par Mathéis MONCHATRE, également directeur de la publication.", en: "Personal, non-commercial website published by Mathéis MONCHATRE, who is also the publication director." } },
+            { h: { fr: "Contact", en: "Contact" },
+              p: { fr: "E-mail : {email}", en: "Email: {email}" } },
+            { h: { fr: "Hébergement", en: "Hosting" },
+              p: { fr: "Ce site est hébergé par GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).", en: "This website is hosted by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA)." } },
+            { h: { fr: "Propriété intellectuelle", en: "Intellectual property" },
+              p: { fr: "Les textes, visuels et projets présentés sont la propriété de leur auteur, sauf mention contraire. Les sites, logos et marques de clients ou d'organisations cités restent la propriété de leurs détenteurs. Toute reproduction sans autorisation est interdite.", en: "The texts, visuals and projects shown belong to their author unless stated otherwise. Websites, logos and brands of clients or organisations mentioned remain the property of their owners. Any reproduction without permission is prohibited." } },
+            { h: { fr: "Données personnelles et cookies", en: "Personal data and cookies" },
+              p: { fr: "Ce site n'utilise ni cookies de suivi ni outil d'analyse. Seule votre préférence de thème (clair / sombre) est enregistrée sur votre appareil. Le lecteur Spotify, contenu tiers, n'est chargé que si vous cliquez sur « Écouter » et peut déposer ses propres cookies (voir la politique de Spotify). Les icônes et la 3D sont chargées depuis des CDN (jsDelivr, cdnjs).", en: "This website uses no tracking cookies or analytics tools. Only your theme preference (light / dark) is saved on your device. The Spotify player, a third-party content, is only loaded if you click « Listen » and may set its own cookies (see Spotify's policy). Icons and 3D are loaded from CDNs (jsDelivr, cdnjs)." } }
+        ]
+    },
+
+    // ==================== PASSIONS (centres d'intérêt) ====================
+    // Pour ajouter une photo / un titre / un jeu : ajoute simplement une ligne dans la liste concernée.
+    passions: {
+        header: {
+            title: { fr: "Passions", en: "Passions" },
+            subtitle: { fr: "Ce qui me fait vibrer quand je ne suis pas devant un écran", en: "What gets me excited when I'm away from a screen" }
+        },
+        equestrian: {
+            icon: "horse",
+            label: { fr: "Ma plus grande passion", en: "My biggest passion" },
+            title: { fr: "Équitation", en: "Horse riding" },
+            since: { value: "3", fr: "ans · mes débuts en selle", en: "years old · my first time in the saddle" },
+            paragraphs: [
+                {
+                    fr: "Je monte à cheval depuis l'âge de 3 ans. C'est bien plus qu'un loisir : c'est là que je me recentre, et que j'ai appris la patience, la confiance et l'écoute d'un partenaire qui ne dit pas un mot.",
+                    en: "I've been riding since I was 3. It's way more than a hobby: it's where I recharge, and where I learned patience, trust and how to listen to a partner who never says a word."
+                },
+                {
+                    fr: "J'ai validé mes Galops jusqu'au Galop 4, Galop 4 Nature compris. Avec mes études et la période Covid, je n'ai pas pu passer les suivants, mais ils arrivent très bientôt, avec une reprise plus intensive de la pratique.",
+                    en: "I've passed my Galops up to Galop 4, including Galop 4 Nature. Because of my studies and the Covid period, I couldn't take the next ones, but they're coming very soon, together with a more intense return to riding."
+                }
+            ],
+            levelsTitle: { fr: "Mon parcours en Galops", en: "My Galop journey" },
+            levels: [
+                { label: "Galop 1", done: true },
+                { label: "Galop 2", done: true },
+                { label: "Galop 3", done: true },
+                { label: "Galop 4", done: true },
+                { label: "Galop 4 Nature", done: true },
+                { label: { fr: "Bientôt : la suite !", en: "Coming soon: what's next!" }, done: false }
+            ],
+            // Ajoute autant de photos que tu veux : src + légende + texte (affichés au survol / au clic)
+            photos: [
+                { src: "./img/passions/cheval-1.jpg", title: { fr: "Légende n°1", en: "Caption #1" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
+                { src: "./img/passions/cheval-2.jpg", title: { fr: "Légende n°2", en: "Caption #2" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
+                { src: "./img/passions/cheval-3.jpg", title: { fr: "Légende n°3", en: "Caption #3" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
+                { src: "./img/passions/cheval-4.jpg", title: { fr: "Légende n°4", en: "Caption #4" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
+                { src: "./img/passions/cheval-5.jpg", title: { fr: "Légende n°5", en: "Caption #5" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
+                { src: "./img/passions/cheval-6.jpg", title: { fr: "Légende n°6", en: "Caption #6" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } }
+            ]
+        },
+        music: {
+            icon: "music",
+            title: { fr: "Mes 5 hits préférés", en: "My 5 favorite hits" },
+            subtitle: { fr: "Ma bande-son du moment : choisis un titre et lance le son.", en: "My current soundtrack: pick a track and hit play." },
+            // Pour chaque titre :
+            //  - spotify : le code <iframe> copié depuis Spotify (Partager > Intégrer le titre), entre `` ; un simple lien Spotify marche aussi
+            //  - title / artist : le texte affiché dans la liste
+            //  - cover : la pochette (image .png dans ./img/passions/music/), facultatif
+            tracks: [
+                { spotify: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/04aAxqtGp5pv12UXAg4pkq?utm_source=generator&si=a9ffb39860804a93" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`, title: "Centuries", artist: "Fall Out Boy", cover: "./img/passions/music/centuries.jpg" },
+                { spotify: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/65uoaqX5qcjXZRheAj1qQT?utm_source=generator&si=19a6464431d143a0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`, title: "Dernière danse", artist: "Indila", cover: "./img/passions/music/derniere-danse.jpg" },
+                { spotify: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6NgYIETQ8U72CVfkzYhK30?utm_source=generator&si=b7aa98a76eb7482b" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`, title: "Fairytale", artist: "Alexander Rybak", cover: "./img/passions/music/fairytale.jpg" },
+                { spotify: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/2UHK8agSYWJUzMuQTPMCVq?utm_source=generator&si=3d24cfe10f964c14" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`, title: "I'm Still Standing", artist: "Elton John", cover: "./img/passions/music/im-still-standing.jpg" },
+                { spotify: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7kUljt0NM5sISL3OGNVxYd?utm_source=generator&si=81e40a9665bf4390" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`, title: "Royalty", artist: "Egzod, Maestro Chives", cover: "./img/passions/music/royalty.jpg" }
+            ]
+        },
+        games: {
+            icon: "gamepad",
+            title: { fr: "Mes 5 jeux préférés", en: "My 5 favorite games" },
+            subtitle: { fr: "Les jeux qui m'ont donné envie de créer les miens.", en: "The games that made me want to build my own." },
+            items: [
+                { name: { fr: "Jeu n°1", en: "Game #1" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-1.jpg", link: "" },
+                { name: { fr: "Jeu n°2", en: "Game #2" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-2.jpg", link: "" },
+                { name: { fr: "Jeu n°3", en: "Game #3" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-3.jpg", link: "" },
+                { name: { fr: "Jeu n°4", en: "Game #4" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-4.jpg", link: "" },
+                { name: { fr: "Jeu n°5", en: "Game #5" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-5.jpg", link: "" }
+            ]
+        },
+        others: {
+            title: { fr: "Et aussi…", en: "And also…" },
+            items: [
+                { icon: "palette", title: { fr: "Dessin", en: "Drawing" }, text: { fr: "Un crayon, une feuille, et mes idées prennent forme. Ça nourrit mon œil pour le design et la 3D.", en: "A pencil, a sheet of paper, and my ideas take shape. It feeds my eye for design and 3D." } },
+                { icon: "archery", title: { fr: "Tir à l'arc", en: "Archery" }, text: { fr: "Concentration et précision : respirer, viser, relâcher.", en: "All about focus and precision: breathe, aim, release." } }
+            ]
+        }
+    },
+
     navigation: {
         fr: [
             { id: "presentation", text: "Accueil", href: "#presentation" },
@@ -759,6 +1069,7 @@ const portfolioData = {
                     { text: "Animation", href: "#realisations-animation" }
                 ]
             },
+            { id: "passions", text: "Passions", href: "#passions" },
             { id: "contact", text: "Contact", href: "#contact" }
         ],
         en: [
@@ -776,6 +1087,7 @@ const portfolioData = {
                     { text: "Animation", href: "#realisations-animation" }
                 ]
             },
+            { id: "passions", text: "Passions", href: "#passions" },
             { id: "contact", text: "Contact", href: "#contact" }
         ]
     }
