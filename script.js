@@ -445,6 +445,7 @@ function generateNavigation() {
         </div>
 
         <ul id="menu">
+            <li class="menu-head"><span>Menu</span><button type="button" class="menu-close" aria-label="${currentLang === 'fr' ? 'Fermer le menu' : 'Close menu'}"></button></li>
             ${navItems.map(item => {
         if (item.dropdown && isMobile) {
             return `
@@ -465,6 +466,7 @@ function generateNavigation() {
         }
     }).join('')}
         </ul>
+        <div class="menu-overlay" id="menuOverlay"></div>
 
         <div class="nav-controls">
             <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
@@ -1541,43 +1543,42 @@ function closeProjectModal() {
 }
 
 // ==================== NAVIGATION ====================
+// Ouvre / ferme le tiroir du menu (mobile et tablette)
+function setMenu(open) {
+    const menu = document.getElementById('menu');
+    if (!menu) return;
+    menu.classList.toggle('active', open);
+    const ov = document.getElementById('menuOverlay');
+    if (ov) ov.classList.toggle('active', open);
+    const icon = document.getElementById('menuIcon');
+    if (icon) icon.className = open ? 'bi bi-x-lg' : 'bi bi-list';
+    const tg = document.getElementById('menuToggle');
+    if (tg) tg.setAttribute('aria-expanded', open);
+    document.body.classList.toggle('menu-open', open);
+}
+
 function initializeNavigation() {
     const menuToggle = document.getElementById('menuToggle');
     const menuIcon = document.getElementById('menuIcon');
     const menu = document.getElementById('menu');
 
     if (menuToggle) {
-        const toggleMenu = () => {
-            menu.classList.toggle('active');
-            const open = menu.classList.contains('active');
-            const icon = document.getElementById('menuIcon'); // l'icône d'origine a été remplacée par le clonage
-            if (icon) icon.className = open ? 'bi bi-x-lg' : 'bi bi-list';
-            const tg = document.getElementById('menuToggle');
-            if (tg) tg.setAttribute('aria-expanded', open);
-        };
-
         // Supprimer ancien listener et ajouter le nouveau
         const newMenuToggle = menuToggle.cloneNode(true);
         menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
+        newMenuToggle.addEventListener('click', () => setMenu(!menu.classList.contains('active')));
+        newMenuToggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setMenu(!menu.classList.contains('active')); } });
 
-        const newMenuIcon = document.getElementById('menuIcon');
-        newMenuToggle.addEventListener('click', toggleMenu);
-        newMenuToggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); } });
-        // Clic en dehors du menu : on le ferme
-        document.addEventListener('click', e => {
-            if (menu.classList.contains('active') && !menu.contains(e.target) && !e.target.closest('#menuToggle')) {
-                menu.classList.remove('active');
-                const icon = document.getElementById('menuIcon');
-                if (icon) icon.className = 'bi bi-list';
-            }
-        });
+        // Fond sombre (clic en dehors du menu) et bouton de fermeture
+        document.getElementById('menuOverlay')?.addEventListener('click', () => setMenu(false));
+        menu.querySelector('.menu-close')?.addEventListener('click', () => setMenu(false));
+    }
 
-        menu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.remove('active');
-                newMenuIcon.className = 'bi bi-list';
-            });
-        });
+    // Échap ou retour à la taille PC : on ferme le menu (branché une seule fois)
+    if (!window.__menuBound) {
+        window.__menuBound = true;
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+        window.addEventListener('resize', () => { if (window.innerWidth > 968) setMenu(false); });
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1606,12 +1607,7 @@ function initializeNavigation() {
                     });
 
                     // Fermer le menu si ouvert
-                    const menu = document.getElementById('menu');
-                    const menuIcon = document.getElementById('menuIcon');
-                    if (menu && menu.classList.contains('active')) {
-                        menu.classList.remove('active');
-                        if (menuIcon) menuIcon.className = 'bi bi-list';
-                    }
+                    setMenu(false);
                 }
             }
         });
@@ -1907,7 +1903,7 @@ function initializeTypingEffect() {
     // Barre de navigation : se masque en descendant (desktop), revient en remontant ou en allant vers le haut
     function initNavHide() {
         const nav = document.getElementById('mainNav');
-        const desk = window.matchMedia('(min-width: 769px) and (hover: hover)');
+        const desk = window.matchMedia('(min-width: 969px) and (hover: hover)');
         if (!nav) return;
         let lastY = window.scrollY, ticking = false;
         const onScroll = () => {

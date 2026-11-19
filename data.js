@@ -589,7 +589,7 @@ const portfolioData = {
                 thumbnail: "./img/dev/aetheria.png",
                 images: ["./img/dev/aetheria.png", "./img/dev/aetheria1.png", "./img/dev/aetheria2.png", "./img/dev/aetheria3.png"],
                 tags: ["C++", "SFML", "Jeu vidéo"],
-                
+
                 shortDescription: { fr: "Jeu de plateforme 2D en C++ avec SFML", en: "2D platformer game in C++ with SFML" },
                 fullDescription: { fr: "Conception d'un jeu de plateforme original en C++ (SFML) respectant un cahier des charges rigoureux, avec gestion des collisions, des mouvements et de la physique des personnages. Le design a été réalisé par mes soins ; face à un délai assez court, certains éléments graphiques ont été générés par IA plutôt que dessinés à la main ou repris de sprite sheets en ligne.", en: "Design of an original platformer in C++ (SFML) meeting strict specifications, with collision handling, movement and character physics. The design was made by me; given a fairly short deadline, some graphic assets were AI-generated rather than hand-drawn or taken from online sprite sheets." },
                 technologies: ["C++", "SFML", "Game design"],
@@ -965,16 +965,26 @@ const portfolioData = {
         link: { fr: "Mentions légales", en: "Legal notice" },
         title: { fr: "Mentions légales", en: "Legal notice" },
         sections: [
-            { h: { fr: "Éditeur du site", en: "Website publisher" },
-              p: { fr: "Site personnel à but non commercial, édité par Mathéis MONCHATRE, également directeur de la publication.", en: "Personal, non-commercial website published by Mathéis MONCHATRE, who is also the publication director." } },
-            { h: { fr: "Contact", en: "Contact" },
-              p: { fr: "E-mail : {email}", en: "Email: {email}" } },
-            { h: { fr: "Hébergement", en: "Hosting" },
-              p: { fr: "Ce site est hébergé par GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).", en: "This website is hosted by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA)." } },
-            { h: { fr: "Propriété intellectuelle", en: "Intellectual property" },
-              p: { fr: "Les textes, visuels et projets présentés sont la propriété de leur auteur, sauf mention contraire. Les sites, logos et marques de clients ou d'organisations cités restent la propriété de leurs détenteurs. Toute reproduction sans autorisation est interdite.", en: "The texts, visuals and projects shown belong to their author unless stated otherwise. Websites, logos and brands of clients or organisations mentioned remain the property of their owners. Any reproduction without permission is prohibited." } },
-            { h: { fr: "Données personnelles et cookies", en: "Personal data and cookies" },
-              p: { fr: "Ce site n'utilise ni cookies de suivi ni outil d'analyse. Seule votre préférence de thème (clair / sombre) est enregistrée sur votre appareil. Le lecteur Spotify, contenu tiers, n'est chargé que si vous cliquez sur « Écouter » et peut déposer ses propres cookies (voir la politique de Spotify). Les icônes et la 3D sont chargées depuis des CDN (jsDelivr, cdnjs).", en: "This website uses no tracking cookies or analytics tools. Only your theme preference (light / dark) is saved on your device. The Spotify player, a third-party content, is only loaded if you click « Listen » and may set its own cookies (see Spotify's policy). Icons and 3D are loaded from CDNs (jsDelivr, cdnjs)." } }
+            {
+                h: { fr: "Éditeur du site", en: "Website publisher" },
+                p: { fr: "Site personnel à but non commercial, édité par Mathéis MONCHATRE, également directeur de la publication.", en: "Personal, non-commercial website published by Mathéis MONCHATRE, who is also the publication director." }
+            },
+            {
+                h: { fr: "Contact", en: "Contact" },
+                p: { fr: "E-mail : {email}", en: "Email: {email}" }
+            },
+            {
+                h: { fr: "Hébergement", en: "Hosting" },
+                p: { fr: "Ce site est hébergé par GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis).", en: "This website is hosted by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA)." }
+            },
+            {
+                h: { fr: "Propriété intellectuelle", en: "Intellectual property" },
+                p: { fr: "Les textes, visuels et projets présentés sont la propriété de leur auteur, sauf mention contraire. Les sites, logos et marques de clients ou d'organisations cités restent la propriété de leurs détenteurs. Toute reproduction sans autorisation est interdite.", en: "The texts, visuals and projects shown belong to their author unless stated otherwise. Websites, logos and brands of clients or organisations mentioned remain the property of their owners. Any reproduction without permission is prohibited." }
+            },
+            {
+                h: { fr: "Données personnelles et cookies", en: "Personal data and cookies" },
+                p: { fr: "Ce site n'utilise ni cookies de suivi ni outil d'analyse. Seule votre préférence de thème (clair / sombre) est enregistrée sur votre appareil. Le lecteur Spotify, contenu tiers, n'est chargé que si vous cliquez sur « Écouter » et peut déposer ses propres cookies (voir la politique de Spotify). Les icônes et la 3D sont chargées depuis des CDN (jsDelivr, cdnjs).", en: "This website uses no tracking cookies or analytics tools. Only your theme preference (light / dark) is saved on your device. The Spotify player, a third-party content, is only loaded if you click « Listen » and may set its own cookies (see Spotify's policy). Icons and 3D are loaded from CDNs (jsDelivr, cdnjs)." }
+            }
         ]
     },
 
@@ -988,7 +998,7 @@ const portfolioData = {
         equestrian: {
             icon: "horse",
             label: { fr: "Ma plus grande passion", en: "My biggest passion" },
-            title: { fr: "Équitation", en: "Horse riding" },
+            title: { fr: "L'Équitation", en: "Horse riding" },
             since: { value: "3", fr: "ans · mes débuts en selle", en: "years old · my first time in the saddle" },
             paragraphs: [
                 {
@@ -998,6 +1008,10 @@ const portfolioData = {
                 {
                     fr: "J'ai validé mes Galops jusqu'au Galop 4, Galop 4 Nature compris. Avec mes études et la période Covid, je n'ai pas pu passer les suivants, mais ils arrivent très bientôt, avec une reprise plus intensive de la pratique.",
                     en: "I've passed my Galops up to Galop 4, including Galop 4 Nature. Because of my studies and the Covid period, I couldn't take the next ones, but they're coming very soon, together with a more intense return to riding."
+                },
+                {
+                    fr: "J’ai aussi eu la chance de monter à cheval pendant 3 ans au sein de l’école militaire équestre du Prytanée national militaire de La Flèche. ",
+                    en: "I also had the opportunity to ride horses for three years at the military equestrian school at the Prytanée National Militaire in La Flèche."
                 }
             ],
             levelsTitle: { fr: "Mon parcours en Galops", en: "My Galop journey" },
@@ -1011,12 +1025,12 @@ const portfolioData = {
             ],
             // Ajoute autant de photos que tu veux : src + légende + texte (affichés au survol / au clic)
             photos: [
-                { src: "./img/passions/cheval-1.jpg", title: { fr: "Légende n°1", en: "Caption #1" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
-                { src: "./img/passions/cheval-2.jpg", title: { fr: "Légende n°2", en: "Caption #2" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
-                { src: "./img/passions/cheval-3.jpg", title: { fr: "Légende n°3", en: "Caption #3" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
-                { src: "./img/passions/cheval-4.jpg", title: { fr: "Légende n°4", en: "Caption #4" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
-                { src: "./img/passions/cheval-5.jpg", title: { fr: "Légende n°5", en: "Caption #5" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } },
-                { src: "./img/passions/cheval-6.jpg", title: { fr: "Légende n°6", en: "Caption #6" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } }
+                { src: "./img/passions/cheval-1.jpeg", title: { fr: "Spectacle équestre joute médiévale", en: "Medieval Joust Horse Show" }, text: { fr: "Lors de la fête du cheval du 7 juin 2026, nous sommes venus réaliser trois différents spectacles au sein du club. Sur la joute, je faisais partie de la tête de départ, où, comme le montre la photo, je brandissais un drapeau pour venir saluer la foule.", en: "During the Horse Festival on June 7, 2026, we came to the club to perform three different shows. During the joust, I was part of the leading group, where, as shown in the photo, I waved a flag to greet the crowd." } },
+                { src: "./img/passions/cheval-2.jpeg", title: { fr: "Spectacle équestre joute médiévale", en: "Medieval Joust Horse Show" }, text: { fr: "Lors de la fête du cheval du 7 juin 2026, nous sommes venus réaliser trois différents spectacles au sein du club. Sur la joute, je faisais partie de la tête de départ, où, comme le montre la photo, je brandissais mon épée lors de la joute, sur le chemin du retour.", en: "During the Horse Festival on June 7, 2026, we came to perform three different shows at the club. In the joust, I was part of the leading group, where, as the photo shows, I was brandishing my sword during the joust on the way back." } },
+                { src: "./img/passions/cheval-3.jpeg", title: { fr: "Concours CSO", en: "CSO competition" }, text: { fr: "À la suite du spectacle équestre du 7 juin 2026, participation à un concours de CSO avec une deuxième place à la clé, malgré une mauvaise relance d'impulsion.", en: "Following the equestrian show on June 7, 2026, I competed in a show jumping competition and took second place, despite a poor takeoff." } },
+                { src: "./img/passions/cheval-4.jpg", title: { fr: "Nouveau défi", en: "New challenge" }, text: { fr: "Débourrage de jeunes cheval", en: "Breaking in Young Horses" } },
+                { src: "./img/passions/cheval-5.jpg", title: { fr: "Entrainement", en: "Training" }, text: { fr: "Préparation d'un concours de CSO et d'un parcours de PTV. (06/2018)", en: "Preparation for a show jumping competition and a cross-country course. (06/2018)" } },
+                // { src: "./img/passions/cheval-6.jpeg", title: { fr: "Légende n°6", en: "Caption #6" }, text: { fr: "Quelques mots sur cette photo.", en: "A few words about this photo." } }
             ]
         },
         music: {
@@ -1040,11 +1054,56 @@ const portfolioData = {
             title: { fr: "Mes 5 jeux préférés", en: "My 5 favorite games" },
             subtitle: { fr: "Les jeux qui m'ont donné envie de créer les miens.", en: "The games that made me want to build my own." },
             items: [
-                { name: { fr: "Jeu n°1", en: "Game #1" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-1.jpg", link: "" },
-                { name: { fr: "Jeu n°2", en: "Game #2" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-2.jpg", link: "" },
-                { name: { fr: "Jeu n°3", en: "Game #3" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-3.jpg", link: "" },
-                { name: { fr: "Jeu n°4", en: "Game #4" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-4.jpg", link: "" },
-                { name: { fr: "Jeu n°5", en: "Game #5" }, platform: { fr: "Plateforme · Genre", en: "Platform · Genre" }, text: { fr: "Pourquoi je l'adore, en une phrase.", en: "Why I love it, in one sentence." }, image: "./img/passions/game-5.jpg", link: "" }
+                {
+                    name: { fr: "ARK: Survival Evolved", en: "ARK: Survival Evolved" },
+                    platform: { fr: "PC · Survie & Dinosaurs", en: "PC · Survival & Dinosaurs" },
+                    text: {
+                        fr: "Pour la liberté totale d'apprivoiser des créatures préhistoriques, bâtir des bases immenses et personnaliser son aventure à l'infini.",
+                        en: "For the complete freedom to tame prehistoric creatures, build massive bases, and endlessly customize the adventure."
+                    },
+                    image: "./img/passions/game-1.jpg",
+                    link: ""
+                },
+                {
+                    name: { fr: "Minecraft", en: "Minecraft" },
+                    platform: { fr: "PC · Sandbox & Créativité", en: "PC · Sandbox & Creativity" },
+                    text: {
+                        fr: "Un terrain de jeu sans limite où la seule frontière est l'imagination, encore plus riche grâce à l'écosystème infini des mods.",
+                        en: "A limitless playground where imagination is the only boundary, made even richer by its endless modding ecosystem."
+                    },
+                    image: "./img/passions/game-2.jpg",
+                    link: ""
+                },
+                {
+                    name: { fr: "Scrap Mechanic", en: "Scrap Mechanic" },
+                    platform: { fr: "PC · Ingénierie & Sandbox", en: "PC · Engineering & Sandbox" },
+                    text: {
+                        fr: "Pour le plaisir de concevoir des véhicules et des mécanismes complexes de zéro en résolvant des casse-têtes purement logiques.",
+                        en: "For the thrill of engineering complex vehicles and contraptions from scratch while solving pure mechanical puzzles."
+                    },
+                    image: "./img/passions/game-3.jpg",
+                    link: ""
+                },
+                {
+                    name: { fr: "Monster Hunter 4 Ultimate", en: "Monster Hunter 4 Ultimate" },
+                    platform: { fr: "Nintendo 3DS · Action-RPG", en: "Nintendo 3DS · Action-RPG" },
+                    text: {
+                        fr: "L'exigence de ses combats de boss mémorables où chaque victoire se mérite par la maîtrise de son arme et l'observation.",
+                        en: "The rewarding challenge of memorable boss hunts where every victory is earned through weapon mastery and keen observation."
+                    },
+                    image: "./img/passions/game-4.jpg",
+                    link: ""
+                },
+                {
+                    name: { fr: "The Legend of Zelda: A Link Between Worlds", en: "The Legend of Zelda: A Link Between Worlds" },
+                    platform: { fr: "Nintendo 3DS · Action-Aventure", en: "Nintendo 3DS · Action-Adventure" },
+                    text: {
+                        fr: "Son génial système de fusion dans les murs qui réinvente la perspective et offre une liberté d'exploration rare dans la série.",
+                        en: "Its brilliant wall-merging mechanic that reinvents spatial puzzles and offers a rare sense of open exploration in the series."
+                    },
+                    image: "./img/passions/game-5.jpg",
+                    link: ""
+                }
             ]
         },
         others: {
