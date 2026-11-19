@@ -8,7 +8,7 @@ const portfolioData = {
             fr: "Développeur Web",
             en: "Web Developer"
         },
-        image: "./img/profile.jpg",
+        image: "./img/Newprofile.png",
         email: "math.monchatre@gmail.com",
         linkedin: "https://www.linkedin.com/in/matheis-monchatre",
         github: "#",

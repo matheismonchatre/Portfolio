@@ -3052,7 +3052,7 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 /* --- Accueil PC compact : tout tient dans un écran, la flèche reste sous les boutons --- */
 @media (min-width: 769px) {
   .presentation { padding: 5.8rem 5% 2.5rem; }
-  .profile-image-container { width: 140px; height: 140px; margin-bottom: 1rem; }
+  .profile-image-container { width: 200px; height: 200px; margin-bottom: 1rem; }
   .avail { margin-bottom: .9rem; }
   .avail:not(.seen) { margin-bottom: 2.7rem; }
   .hero-description p { margin-bottom: .6rem; }
