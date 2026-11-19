@@ -945,10 +945,13 @@ const portfolioData = {
     // Navigation ------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // ==================== RECHERCHE DE STAGE (badge + fenêtre sur l'accueil) ====================
     availability: {
+        // true = le badge s'affiche sur l'accueil ; false = il est masqué (quand tu n'as plus besoin de chercher un stage)
+        enabled: true,
         badge: { fr: "Recherche de stage", en: "Open to internships" },
         title: { fr: "Je recherche un stage", en: "I'm looking for an internship" },
+        hint: { fr: "Appuyez pour voir les détails", en: "Tap to see the details" },
         rows: [
-            { icon: "bi-code-slash", label: { fr: "Domaine", en: "Field" }, text: { fr: "Développement web, 3D & réalité virtuelle", en: "Web development, 3D & virtual reality" } },
+            { icon: "bi-code-slash", label: { fr: "Domaine", en: "Field" }, text: { fr: "Développement web et d'applications, création de jeux vidéo, 3D & réalité virtuelle", en: "Web and app development, video game creation, 3D & virtual reality" } },
             { icon: "bi-geo-alt-fill", label: { fr: "Basé à", en: "Based in" }, text: { fr: "Le Lude (Sarthe, 72)", en: "Le Lude (Sarthe, 72), France" } },
             { icon: "bi-map", label: { fr: "Zone", en: "Area" }, text: { fr: "Pays de la Loire et au-delà : Le Mans, Angers, Laval, Nantes, Tours…", en: "Pays de la Loire and beyond: Le Mans, Angers, Laval, Nantes, Tours…" } },
             { icon: "bi-car-front-fill", label: { fr: "Mobilité", en: "Mobility" }, text: { fr: "Véhiculé, prêt à me déplacer", en: "I have a car and I'm ready to travel" } }

@@ -440,7 +440,7 @@ function generateNavigation() {
     nav.innerHTML = `
         <div class="logo">Portfolio</div>
 
-        <div class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <div class="menu-toggle" id="menuToggle" role="button" tabindex="0" aria-label="Menu" aria-expanded="false">
             <i class="bi bi-list" id="menuIcon"></i>
         </div>
 
@@ -512,10 +512,10 @@ function generatePresentation() {
                     <span data-fr="Mes réalisations" data-en="My projects">${currentLang === 'fr' ? 'Mes réalisations' : 'My projects'}</span>
                 </a>
             </div>
-        </div>
 
-        <div class="scroll-indicator">
-            <i class="bi bi-chevron-down"></i>
+            <a href="#competences" class="scroll-indicator" aria-label="${currentLang === 'fr' ? 'Descendre' : 'Scroll down'}">
+                <i class="bi bi-chevron-down"></i>
+            </a>
         </div>
     `;
 }
@@ -650,7 +650,7 @@ function generateProjects() {
                     </div>
 
                     <!-- Accordéon Catégories -->
-                    <div class="filter-accordion-item">
+                    <div class="filter-accordion-item filter-cat-item">
                         <div class="filter-accordion-header">
                             <span>${currentLang === 'fr' ? 'Catégories' : 'Categories'}</span>
                             <i class="bi bi-chevron-down filter-accordion-icon"></i>
@@ -726,7 +726,7 @@ function generateProjects() {
                 <div class="projects-empty-state" id="projectsEmptyState">
                     <i class="bi bi-search"></i>
                     <h3>${currentLang === 'fr' ? 'Explorez mes réalisations' : 'Explore my projects'}</h3>
-                    <p>${currentLang === 'fr' ? 'Utilisez les filtres à gauche ou la barre de recherche pour découvrir mes projets.' : 'Use the filters on the left or the search bar to discover my projects.'}</p>
+                    <p>${currentLang === 'fr' ? `Utilisez les filtres ${window.innerWidth < 969 ? 'ci-dessus' : 'à gauche'} ou la barre de recherche pour découvrir mes projets.` : `Use the filters ${window.innerWidth < 969 ? 'above' : 'on the left'} or the search bar to discover my projects.`}</p>
                     <div class="quick-filters">
                         <button class="quick-filter-btn" data-quick-cat="dev">${currentLang === 'fr' ? ' Voir le dev' : ' See dev'}</button>
                         <button class="quick-filter-btn" data-quick-cat="design">${currentLang === 'fr' ? ' Voir le design' : ' See design'}</button>
@@ -797,11 +797,6 @@ function generateProjects() {
 
     // Initialiser les accordéons des filtres (un seul ouvert)
     const initializeFilterAccordions = () => {
-        // Sur tablette et mobile, les filtres sont masqués
-        if (window.innerWidth < 969) {
-            return;
-        }
-
         const accordionItems = document.querySelectorAll('.filter-accordion-item');
         const headers = document.querySelectorAll('.filter-accordion-header');
 
@@ -964,9 +959,8 @@ function generateProjects() {
         const results = document.getElementById('projectResults');
         const categorizedLists = document.getElementById('categorizedLists');
         const emptyState = document.getElementById('projectsEmptyState');
-        const isMobile = window.innerWidth < 769;
-        const isTablet = window.innerWidth >= 769 && window.innerWidth < 969;
-        const isDesktop = window.innerWidth >= 969;
+        // Même logique sur tous les écrans (grille avec filtres / liste en accordéons)
+        const isMobile = false, isTablet = false, isDesktop = true;
 
         // Determine if any filter is active
         const hasActiveFilter = forceShow || projectFilters.query || projectFilters.categories.size > 0 || projectFilters.tags.size > 0 || projectFilters.techs.size > 0;
@@ -1191,15 +1185,9 @@ function generateProjects() {
     initializeCategoryAccordions();
     initializeViewToggle();
 
-    // Affichage initial : sur mobile/tablette, montrer les accordéons tout de suite
+    // Sur petit écran, présélectionne la première catégorie pour afficher des projets immédiatement
     if (window.innerWidth < 969) {
-        const categorizedLists = document.getElementById('categorizedLists');
-        if (categorizedLists) {
-            categorizedLists.style.display = 'flex';
-            categorizedLists.classList.add('accordion-view');
-        }
-        const emptyState = document.getElementById('projectsEmptyState');
-        if (emptyState) emptyState.style.display = 'none';
+        document.querySelector('.filter-btn')?.click();
     }
 }
 
@@ -1561,11 +1549,11 @@ function initializeNavigation() {
     if (menuToggle) {
         const toggleMenu = () => {
             menu.classList.toggle('active');
-            if (menu.classList.contains('active')) {
-                menuIcon.className = 'bi bi-x-lg';
-            } else {
-                menuIcon.className = 'bi bi-list';
-            }
+            const open = menu.classList.contains('active');
+            const icon = document.getElementById('menuIcon'); // l'icône d'origine a été remplacée par le clonage
+            if (icon) icon.className = open ? 'bi bi-x-lg' : 'bi bi-list';
+            const tg = document.getElementById('menuToggle');
+            if (tg) tg.setAttribute('aria-expanded', open);
         };
 
         // Supprimer ancien listener et ajouter le nouveau
@@ -1574,6 +1562,15 @@ function initializeNavigation() {
 
         const newMenuIcon = document.getElementById('menuIcon');
         newMenuToggle.addEventListener('click', toggleMenu);
+        newMenuToggle.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); } });
+        // Clic en dehors du menu : on le ferme
+        document.addEventListener('click', e => {
+            if (menu.classList.contains('active') && !menu.contains(e.target) && !e.target.closest('#menuToggle')) {
+                menu.classList.remove('active');
+                const icon = document.getElementById('menuIcon');
+                if (icon) icon.className = 'bi bi-list';
+            }
+        });
 
         menu.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
@@ -2159,14 +2156,17 @@ function initPassions() {
 // ==================== BADGE « RECHERCHE DE STAGE » ====================
 function availabilityHtml() {
     const A = portfolioData.availability, p = portfolioData.profile, fr = currentLang === 'fr';
-    if (!A) return '';
+    if (!A || A.enabled === false) return '';
+    let seen = false;
+    try { seen = sessionStorage.getItem('availSeen') === '1'; } catch (e) { /* ignore */ }
     const rows = A.rows.slice();
     if (pT(A.period)) rows.push({ icon: 'bi-calendar-event', label: { fr: 'Période', en: 'Period' }, text: A.period });
     return `
-        <div class="avail">
+        <div class="avail${seen ? ' seen' : ''}">
             <button type="button" class="avail-badge" aria-expanded="false" aria-controls="availPanel">
                 <span class="avail-dot"></span><span>${pT(A.badge)}</span><i class="bi bi-chevron-down"></i>
             </button>
+            <span class="avail-hint" aria-hidden="true"><i class="bi bi-hand-index-thumb-fill"></i><span>${pT(A.hint)}</span></span>
             <div class="avail-panel" id="availPanel" role="dialog" aria-label="${pT(A.title)}">
                 <h3>${pT(A.title)}</h3>
                 <ul>${rows.map(r => `<li><i class="bi ${r.icon}"></i><div><small>${pT(r.label)}</small><span>${pT(r.text)}</span></div></li>`).join('')}</ul>
@@ -2217,6 +2217,8 @@ document.addEventListener('click', e => {
     if (wrap) {
         if (e.target.closest('.avail-badge')) {
             wrap.classList.toggle('open');
+            wrap.classList.add('seen');
+            try { sessionStorage.setItem('availSeen', '1'); } catch (err) { /* ignore */ }
             wrap.querySelector('.avail-badge').setAttribute('aria-expanded', wrap.classList.contains('open'));
         } else if (!e.target.closest('.avail-panel')) closeAvailability();
     }

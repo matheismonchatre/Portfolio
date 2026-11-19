@@ -2136,22 +2136,9 @@ section {
         font-size: 1rem;
     }
 
-    /* Masquer la barre de recherche, sidebar, toggle vue */
-    .projects-header {
-        display: none !important;
-    }
 
-    .filter-sidebar {
-        display: none !important;
-    }
 
-    .projects-empty-state {
-        display: none !important;
-    }
 
-    #projectResults {
-        display: none !important;
-    }
 
     /* Layout principal */
     .realisations-wrapper {
@@ -2167,7 +2154,7 @@ section {
 
     /* Toujours afficher les listes par catégorie */
     .categorized-lists {
-        display: flex !important;
+        display: flex;
         flex-direction: column;
         gap: 2rem;
         padding: 0;
@@ -2384,24 +2371,9 @@ section {
     }
 
     /* ===== RÉALISATIONS MOBILE ===== */
-    /* Masquer la barre de recherche, filtres et toggle vue */
-    .projects-header {
-        display: none !important;
-    }
 
-    /* Masquer la sidebar */
-    .filter-sidebar {
-        display: none !important;
-    }
 
-    /* Masquer l'état vide et la grille filtrée */
-    .projects-empty-state {
-        display: none !important;
-    }
 
-    #projectResults {
-        display: none !important;
-    }
 
     /* Le wrapper en colonne simple */
     .realisations-wrapper {
@@ -2418,7 +2390,7 @@ section {
 
     /* Afficher les listes catégorisées */
     .categorized-lists {
-        display: flex !important;
+        display: flex;
         flex-direction: column;
         gap: 2rem;
         padding: 0;
@@ -2623,10 +2595,6 @@ section {
         width: 100%;
     }
 
-    /* Vue accordéons par défaut sur tablette */
-    .projects-empty-state {
-        display: none !important;
-    }
 }
 
 /* ==================== SAFE AREA (iPhone notch/Dynamic Island) ==================== */
@@ -2943,3 +2911,162 @@ body[data-amb="passions"] { --amb1: rgba(255,191,153,.28); --amb2: rgba(184,164,
 .ps-facade small { color: var(--text-muted); font-size: .75rem; }
 .avail-panel { background: #15252e; backdrop-filter: blur(14px); }
 body.light-theme .avail-panel { background: #ffffff; }
+
+/* ===== Anti-débordement horizontal (évite que le téléphone dézoome toute la page) ===== */
+#presentation, #competences, #diplomes, #experience, #realisations, #passions, #contact { overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+@media (max-width: 968px) {
+  /* menu burger fermé : plus posé hors écran avec right:-100%, mais masqué */
+  #menu { right: 0; transform: translateX(105%); visibility: hidden; pointer-events: none; transition: transform .3s ease, visibility .3s; }
+  #menu.active { transform: none; visibility: visible; pointer-events: auto; }
+}
+
+/* =====================================================================
+   RESPONSIVE v2 : burger, filtres, tailles de texte, espacements, badge
+   ===================================================================== */
+
+/* --- Burger dessiné en CSS (indépendant de la police d'icônes) --- */
+.menu-toggle { width: 46px; height: 46px; border-radius: 50%; border: 2px solid var(--primary-color); align-items: center; justify-content: center; flex-shrink: 0; }
+.menu-toggle .bi { font-size: 0; display: block; position: relative; width: 20px; height: 14px; }
+.menu-toggle .bi::before { content: ""; font-size: 0; position: absolute; left: 0; right: 0; top: 0; height: 2px; border-radius: 2px; background: currentColor; box-shadow: 0 6px 0 currentColor, 0 12px 0 currentColor; }
+.menu-toggle .bi-x-lg::before { top: 6px; box-shadow: none; transform: rotate(45deg); }
+.menu-toggle .bi-x-lg::after { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; border-radius: 2px; background: currentColor; transform: rotate(-45deg); }
+
+/* --- Accueil : la flèche ne chevauche plus les boutons (PC) --- */
+
+/* --- Badge « Recherche de stage » : indice animé (doigt qui appuie) --- */
+.avail-hint { position: absolute; left: 50%; top: calc(100% + 6px); transform: translateX(-50%); display: flex; align-items: center; gap: .5rem; white-space: nowrap; pointer-events: none;
+  font-size: .9rem; color: var(--text-muted); }
+.avail-hint .bi { font-size: 1.7rem; color: var(--primary-color); position: relative; animation: availTap 1.6s ease-in-out infinite; transform-origin: 30% 20%; }
+.avail-hint .bi::after { content: ""; position: absolute; left: 6px; top: 0; width: 18px; height: 18px; margin: -4px 0 0 -2px; border-radius: 50%; border: 2px solid var(--primary-color); opacity: 0; animation: availRipple 1.6s ease-out infinite; }
+.avail.open .avail-hint, .avail.seen .avail-hint { display: none; }
+.avail:not(.seen):not(.open) .avail-badge { animation: availGlow 2.4s ease-in-out infinite; }
+.avail:not(.seen) { margin-bottom: 3.2rem; }
+@keyframes availTap { 0%, 55%, 100% { transform: translateY(0) scale(1); } 28% { transform: translateY(-9px) scale(1); } 40% { transform: translateY(0) scale(.88); } }
+@keyframes availRipple { 0%, 38% { opacity: 0; transform: scale(.4); } 45% { opacity: .9; } 85%, 100% { opacity: 0; transform: scale(2.4); } }
+@keyframes availGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); } 50% { box-shadow: 0 0 0 7px rgba(61,220,132,.18); } }
+
+/* --- Footer : adapté à tous les écrans --- */
+#siteFooter { width: 100%; padding: 2rem 5% calc(2rem + env(safe-area-inset-bottom)); }
+#siteFooter p { line-height: 1.9; }
+
+/* =============== TABLETTE ET MOBILE (<= 968 px) =============== */
+@media (max-width: 968px) {
+  /* barre : logo à gauche, thème + langue, burger tout à droite */
+  #mainNav { display: flex; align-items: center; gap: .6rem; min-height: 68px; padding: .5rem 1rem; }
+  #mainNav .logo { margin-right: auto; }
+  #mainNav .nav-controls { order: 2; display: flex; gap: .5rem; }
+  #mainNav .menu-toggle { order: 3; }
+  .theme-toggle, .lang-switch { min-width: 46px; min-height: 46px; }
+  #menu a { font-size: 1.15rem; padding: 1.1rem 0; }
+
+  /* Réalisations : [Filtrage | Liste] en haut, puis filtres, puis recherche, puis projets */
+  .realisations-wrapper { display: flex; flex-direction: column; gap: 1.1rem; padding: 0; }
+  .realisations-main, .projects-header { display: contents; }
+  .projects-controls { order: 1; display: flex; width: 100%; margin: 0; }
+  .projects-controls .filter-toggle { display: none !important; }
+  .view-toggle { display: flex; width: 100%; }
+  .view-btn { flex: 1; justify-content: center; min-height: 54px; font-size: 1.05rem; }
+  .filter-sidebar { order: 2; position: static !important; inset: auto !important; transform: none !important; width: 100% !important; height: auto !important; max-height: none !important;
+    opacity: 1 !important; visibility: visible !important; display: block !important; box-shadow: none !important; z-index: auto !important; background: none !important; border: 0 !important; padding: 0 !important; overflow: visible !important; }
+  .sidebar-overlay { display: none !important; }
+  .filter-panel { padding: 1rem; border-radius: 18px; background: var(--card-bg); border: 1px solid rgba(79,195,247,.25); }
+  .filters-title, .filter-close-btn { display: none !important; }
+  .filter-cat-item { border: 0; background: none; margin: 0 0 .7rem; padding: 0; }
+  .filter-cat-item .filter-accordion-header { display: none; }
+  .filter-cat-item .filter-accordion-body { display: block !important; max-height: none !important; opacity: 1 !important; padding: 0 !important; overflow: visible; }
+  .filter-cat-item .filter-controls { display: flex; flex-direction: row; flex-wrap: wrap; gap: .6rem; }
+  .filter-cat-item .filter-btn { flex: 1 1 auto; width: auto; }
+  .filter-btn { min-height: 54px; font-size: 1.05rem; text-align: center; justify-content: center; padding: .6rem .3rem; }
+  .filter-accordion-header { min-height: 54px; font-size: 1.05rem; }
+  .chip { font-size: 1rem; padding: .6rem 1.05rem; }
+  #applyFilters { display: none !important; }
+  #clearFilters { width: 100%; min-height: 50px; font-size: 1rem; }
+  .project-search { order: 3; width: 100%; max-width: none; margin: 0; }
+  #projectSearch { min-height: 56px; font-size: 1.05rem; }
+  #projectResults, #projectsEmptyState, #categorizedLists { order: 4; width: 100%; }
+  .realisations-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; }
+  .project-thumbnail { height: clamp(220px, 34vw, 300px); }
+}
+
+/* =============== MOBILE (<= 768 px) =============== */
+@media (max-width: 768px) {
+  html { font-size: 106.25%; }                      /* base 17 px */
+  .presentation { min-height: auto; padding: 6rem 5% 2.5rem; }
+  .scroll-indicator { display: none; }
+  .profile-image-container { width: 150px; height: 150px; margin-bottom: 1.2rem; }
+  .hero-description p { font-size: 1.08rem; line-height: 1.7; }
+  .typing-container { font-size: 1.2rem; }
+  .cta-buttons .btn { min-height: 52px; font-size: 1.05rem; }
+  .avail-badge { font-size: 1.05rem; padding: .65rem 1.2rem; }
+  .avail-panel li span, .avail-panel li small { font-size: 1rem; }
+  .avail-panel li small { font-size: .8rem; }
+
+  #competences, #diplomes, #experience, #realisations, #passions, #contact { padding-top: 3rem; padding-bottom: 3rem; }
+  .section-header { margin-bottom: 1.8rem; }
+  .section-header h2 { font-size: 2rem; }
+  .section-header p { font-size: 1.05rem; }
+  .competence-header span, .competence-item span { font-size: 1.05rem; }
+  .timeline-content p, #diplomes p { font-size: 1.02rem; }
+  .project-card h3 { font-size: 1.5rem; }
+  .project-card p { font-size: 1.05rem; line-height: 1.6; }
+  .project-card .tag, .tag { font-size: .95rem; padding: .4rem .9rem; }
+  .realisations-grid { grid-template-columns: 1fr; }
+  .project-thumbnail { height: clamp(230px, 62vw, 320px); }
+  #contact p, #contact a { font-size: 1.05rem; }
+
+  /* Passions */
+  .ps-block { margin-top: 2.6rem; }
+  .ps-head h3 { font-size: 1.75rem; }
+  .ps-head p { font-size: 1.05rem; }
+  .ps-title { font-size: 2.3rem; }
+  .ps-horse { gap: 1.6rem; }
+  .ps-horse-info p { font-size: 1.12rem; line-height: 1.8; }
+  .ps-levels li { font-size: .98rem; padding: .5rem 1rem; }
+  .ps-mosaic { column-gap: .7rem; }
+  .ps-photo { margin-bottom: .7rem; border-radius: 14px; }
+  .ps-photo figcaption { font-size: 1rem; }
+  .ps-player { padding: .9rem; gap: 1.1rem; }
+  .ps-stage { padding: .6rem; }
+  .ps-facade-cover { width: 170px; height: 170px; }
+  .ps-facade-title { font-size: 1.5rem; }
+  .ps-facade-artist { font-size: 1.1rem; }
+  .ps-facade-play { font-size: 1.15rem; padding: .8rem 1.8rem; }
+  .ps-facade small { font-size: .85rem; }
+  .ps-tracks li { grid-template-columns: 1.2rem 58px minmax(0, 1fr) auto; gap: .8rem; padding: .75rem .6rem; min-height: 78px; }
+  .ps-tracks .ps-cover { width: 58px; height: 58px; }
+  .ps-tracks .txt b { font-size: 1.12rem; }
+  .ps-tracks .txt small { font-size: .98rem; }
+  .ps-tip { font-size: .98rem; }
+  .ps-card { flex-basis: 84%; }
+  .ps-card-body h4 { font-size: 1.3rem; }
+  .ps-card-body small { font-size: .98rem; }
+  .ps-card-body p { font-size: 1.04rem; }
+  .ps-other { padding: 1.5rem; }
+  .ps-other h4 { font-size: 1.3rem; }
+  .ps-other p { font-size: 1.06rem; }
+  #siteFooter p { font-size: 1.02rem; }
+  .legal-link { padding: .5rem .2rem; }
+}
+
+/* --- Accueil PC compact : tout tient dans un écran, la flèche reste sous les boutons --- */
+@media (min-width: 769px) {
+  .presentation { padding: 5.8rem 5% 2.5rem; }
+  .profile-image-container { width: 140px; height: 140px; margin-bottom: 1rem; }
+  .avail { margin-bottom: .9rem; }
+  .avail:not(.seen) { margin-bottom: 2.7rem; }
+  .hero-description p { margin-bottom: .6rem; }
+}
+
+/* Flèche d'accueil : dans le flux, juste sous les boutons (ne les chevauche plus) */
+.scroll-indicator { position: static; display: block; width: fit-content; margin: 1.6rem auto 0; transform: none; text-align: center; line-height: 1; text-decoration: none; animation: bounceY 2s infinite; }
+@keyframes bounceY { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-14px); } }
+@media (min-width: 769px) and (max-height: 950px) {
+  .presentation { padding-top: 5.8rem; padding-bottom: 1.8rem; }
+  .profile-image-container { width: 108px; height: 108px; margin-bottom: .8rem; }
+  .hero-description p { font-size: 1rem; line-height: 1.55; }
+  .scroll-indicator { margin-top: 1rem; }
+}
+
+/* Footer : le bouton « retour en haut » ne recouvre plus le texte sur mobile */
+@media (max-width: 768px) { #siteFooter { padding: 1.8rem 1.2rem 5.5rem; } }
